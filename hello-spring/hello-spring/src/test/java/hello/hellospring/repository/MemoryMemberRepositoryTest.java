@@ -22,7 +22,7 @@ class MemoryMemberRepositoryTest{
 
     @Test
     public void findByName(){
-
+        Member member = new Member();
 
     }
 }
