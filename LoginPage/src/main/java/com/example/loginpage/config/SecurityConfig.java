@@ -31,7 +31,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         //인증을 무시하기 위한 설정
         web.ignoring().antMatchers("/css/**","/js/**","/ing/**","/lib/**");
     }
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
@@ -48,14 +47,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .invalidateHttpSession(true)    // 세션 초기화
                 .and()
                 .exceptionHandling();
-    }
-
-    @Override
-    public void configure(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests()
-                .antMatcher()
-                .and()
-
     }
 
     @Override
