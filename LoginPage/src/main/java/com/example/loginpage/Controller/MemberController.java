@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 @AllArgsConstructor
@@ -18,11 +19,17 @@ public class MemberController {
         return "/home/index";
     }
 
-    @GetMapping("/member/sighup")
+    @GetMapping("/member/signup")
     public String sighupForm(Model model) {
         model.addAttribute("member", new MemberDto());
 
         return "/member/signupForm";
+    }
+
+    @GetMapping("/home/index")
+    public String index(Model model){
+        model.addAttribute("member", new MemberDto());
+        return "/home/index";
     }
 
     @PostMapping("/member/signup")

@@ -26,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder(); //패스워드를 암호화하는 구연체
     }
 
-    @Override//상위클래스에서 선언된 한 요소를 오버라이드 할 것
+    @Override//상위클래스에서 선언된 한
     public void configure(WebSecurity web) throws Exception{
         //인증을 무시하기 위한 설정
         web.ignoring().antMatchers("/css/**","/js/**","/ing/**","/lib/**");
