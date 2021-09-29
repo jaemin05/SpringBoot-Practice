@@ -30,7 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception{
         //인증을 무시하기 위한 설정
         web.ignoring().antMatchers("/css/**","/js/**","/ing/**","/lib/**");
-    }
+    }/*
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
@@ -47,7 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .invalidateHttpSession(true)    // 세션 초기화
                 .and()
                 .exceptionHandling();
-    }
+    }*/
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception { //AuthenticationManagerBuilder : Spring Security의 모든 인증을 관리한다.
