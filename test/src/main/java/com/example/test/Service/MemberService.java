@@ -20,7 +20,7 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-public class MemberService implements UserDetailsService {
+public class MemberService implements UserDetailsService{
     private memberRepository memberRepository;
 
     // 회원가입
