@@ -1,5 +1,7 @@
 package com.example.library.model;
 
+import java.util.List;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,7 +16,11 @@ public class Author {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String firstName;
-    private String lastName;    
+    private String lastName;
 
+    @JsonBackReference
+    @OneToMany(mappedBy = "author", // mappedBy : 관계의 주체
+            fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Book> books;
 }
 
