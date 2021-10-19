@@ -1,10 +1,7 @@
 package com.example.loginpage.Dto;
 
 import com.example.loginpage.Controller.domain.Member;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
