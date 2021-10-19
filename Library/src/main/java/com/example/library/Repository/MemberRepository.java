@@ -1,6 +1,7 @@
 package com.example.library.Repository;
 
-import javassist.compiler.ast.Member;
+
+import com.example.library.model.Member;
 
 public interface MemberRepository extends JpaRepository<Member, Long> {
 }
