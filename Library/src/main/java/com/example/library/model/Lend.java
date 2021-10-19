@@ -25,4 +25,5 @@ public class Lend {
     @JsonManagedReference
     private Book book;
 
+
 }
