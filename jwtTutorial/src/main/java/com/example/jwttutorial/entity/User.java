@@ -45,4 +45,7 @@ public class User {
     private Set<Authority> authorities; //Set 중복X
 
 
+    public boolean isActivated() {
+        return activated;
+    }
 }
