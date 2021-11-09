@@ -13,7 +13,7 @@ import javax.validation.Valid;
 @RequestMapping("/api")
 public class UserController {
     private final UserService userService;
- 
+
     public UserController(UserService userService) {
         this.userService = userService;
     }
@@ -30,7 +30,7 @@ public class UserController {
     }
 
     @GetMapping("/user/{username}")
-    @PreAuthorize("hasAnyRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<User> getUserInfo(@PathVariable String username) {
         return ResponseEntity.ok(userService.getUserWithAuthorities(username).get());
     }
