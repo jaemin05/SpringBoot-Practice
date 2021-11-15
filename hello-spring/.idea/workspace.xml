@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="4fea05f6-45a9-4aa7-88e1-0b1ce15096ec" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../Library/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Library/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Library/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Library/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Library/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Library/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Library/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Library/src/main/java/com/example/library/LibraryApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Library/src/main/java/com/example/library/Repository/AuthorRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Library/src/main/java/com/example/library/Repository/BookRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Library/src/main/java/com/example/library/Repository/JpaRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Library/src/main/java/com/example/library/Repository/LendRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Library/src/main/java/com/example/library/Repository/MemberRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Library/src/main/java/com/example/library/controller/LibraryController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Library/src/main/java/com/example/library/model/Author.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Library/src/main/java/com/example/library/model/Book.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Library/src/main/java/com/example/library/model/Lend.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Library/src/main/java/com/example/library/model/LendStatus.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Library/src/main/java/com/example/library/model/Member.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Library/src/main/java/com/example/library/model/MemberStatus.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Library/src/main/java/com/example/library/model/request/AuthorCreationRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Library/src/main/java/com/example/library/model/request/BookCreationRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Library/src/main/java/com/example/library/model/request/BookLendRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Library/src/main/java/com/example/library/model/request/MemberCreationRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Library/src/main/java/com/example/library/service/LibraryService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Library/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Library/src/main/resources/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Library/src/test/java/com/example/library/LibraryApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LoginAndSignup/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../LoginAndSignup/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LoginPage/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LoginPage/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LoginPage/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LoginPage/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LoginPage/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LoginPage/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LoginPage/org/springframework/security/config/annotation/web/builders/annotations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LoginPage/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LoginPage/src/main/java/com/example/loginpage/Controller/MemberController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LoginPage/src/main/java/com/example/loginpage/Controller/domain/Member.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LoginPage/src/main/java/com/example/loginpage/Dto/MemberDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LoginPage/src/main/java/com/example/loginpage/LoginPageApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LoginPage/src/main/java/com/example/loginpage/Repository/MemberRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LoginPage/src/main/java/com/example/loginpage/Service/MemberService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LoginPage/src/main/java/com/example/loginpage/Service/Role.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LoginPage/src/main/java/com/example/loginpage/config/SecurityConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LoginPage/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LoginPage/src/main/resources/templates/home/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LoginPage/src/main/resources/templates/member/loginForm.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LoginPage/src/main/resources/templates/member/signupForm.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LoginPage/src/test/java/com/example/loginpage/LoginPageApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../firstproject/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../firstproject/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../firstproject/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../firstproject/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../firstproject/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../firstproject/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../firstproject/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../firstproject/src/main/java/com/example/firstproject/FirstprojectApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../firstproject/src/main/java/com/example/firstproject/controller/ArticleController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../firstproject/src/main/java/com/example/firstproject/controller/FirstController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../firstproject/src/main/java/com/example/firstproject/dto/ArticleForm.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../firstproject/src/main/java/com/example/firstproject/entity/Article.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../firstproject/src/main/java/com/example/firstproject/repository/ArticleRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../firstproject/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../firstproject/src/main/resources/static/hello.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../firstproject/src/main/resources/templates/articles/new.mustache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../firstproject/src/main/resources/templates/goodbye.mustache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../firstproject/src/main/resources/templates/greetings.mustache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../firstproject/src/main/resources/templates/layouts/footer.mustache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../firstproject/src/main/resources/templates/layouts/header.mustache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../firstproject/src/test/java/com/example/firstproject/FirstprojectApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fristSpring(Maven)/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fristSpring(Maven)/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fristSpring(Maven)/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fristSpring(Maven)/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fristSpring(Maven)/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fristSpring(Maven)/.idea/runConfigurations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fristSpring(Maven)/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fristSpring(Maven)/src/main/java/io/namoosori/hello/Application.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fristSpring(Maven)/src/main/java/io/namoosori/hello/HelloController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fristSpring(Maven)/src/main/resources/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fristSpring(Maven)/target/classes/io/namoosori/hello/Application.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fristSpring(Maven)/target/classes/io/namoosori/hello/HelloController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fristSpring(Maven)/user-rest/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fristSpring(Maven)/user-rest/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fristSpring(Maven)/user-rest/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fristSpring(Maven)/user-rest/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fristSpring(Maven)/user-rest/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fristSpring(Maven)/user-rest/.idea/runConfigurations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fristSpring(Maven)/user-rest/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fristSpring(Maven)/user-rest/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fristSpring(Maven)/user-rest/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/hello-spring.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hello-spring/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hello-spring/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hello-spring/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hello-spring/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hello-spring/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hello-spring/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hello-spring/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hello-spring/sql/ddl.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hello-spring/src/main/java/hello/hellospring/HelloSpringApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hello-spring/src/main/java/hello/hellospring/SpringConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hello-spring/src/main/java/hello/hellospring/aop/TimeTraceAop.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hello-spring/src/main/java/hello/hellospring/controller/HelloController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hello-spring/src/main/java/hello/hellospring/controller/HomeController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hello-spring/src/main/java/hello/hellospring/controller/MemberController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hello-spring/src/main/java/hello/hellospring/controller/MemberForm.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hello-spring/src/main/java/hello/hellospring/domain/Member.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hello-spring/src/main/java/hello/hellospring/repository/JdbcMemberRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hello-spring/src/main/java/hello/hellospring/repository/JdbcTemplateMemberRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hello-spring/src/main/java/hello/hellospring/repository/JpaMemberRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hello-spring/src/main/java/hello/hellospring/repository/MemberRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hello-spring/src/main/java/hello/hellospring/repository/MemoryMemberRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hello-spring/src/main/java/hello/hellospring/repository/SpringDataJpaMemberRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hello-spring/src/main/java/hello/hellospring/service/MemberService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hello-spring/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hello-spring/src/main/resources/static/hello-static.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hello-spring/src/main/resources/static/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hello-spring/src/main/resources/templates/hello-template.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hello-spring/src/main/resources/templates/hello.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hello-spring/src/main/resources/templates/home.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hello-spring/src/main/resources/templates/members/CreateMemberForm.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hello-spring/src/main/resources/templates/members/MemberList.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hello-spring/src/test/java/hello/hellospring/HelloSpringApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hello-spring/src/test/java/hello/hellospring/repository/MemoryMemberRepositoryTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hello-spring/src/test/java/hello/hellospring/service/MemberServiceIntegrationTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/hello-spring/src/test/java/hello/hellospring/service/MemberServiceTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test/src/main/java/com/example/test/Config/SecurityConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test/src/main/java/com/example/test/Controller/Domain/Member.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test/src/main/java/com/example/test/Controller/memberController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test/src/main/java/com/example/test/Dto/memberDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test/src/main/java/com/example/test/Repository/memberRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test/src/main/java/com/example/test/Service/MemberService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test/src/main/java/com/example/test/Service/Role.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test/src/main/java/com/example/test/TestApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test/src/test/java/com/example/test/TestApplicationTests.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$/hello-spring">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$/hello-spring">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="hello-spring" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="hello-spring" type="f1a62948:ProjectNode" />
+                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="hello-spring" type="f1a62948:ProjectNode" />
+                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
+                <item name="compileClasspath" type="62daadca:ExternalSystemViewDefaultContributor$DependencyScopeExternalSystemNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JUnit5 Test Class" />
+        <option value="HTML File" />
+        <option value="Class" />
+        <option value="Interface" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="JpbToolWindowState">
+    <option name="myId2FirstActivated">
+      <map>
+        <entry key="JPA Palette" value="true" />
+        <entry key="JPA Structure" value="true" />
+      </map>
+    </option>
+    <option name="myId2Visible">
+      <map>
+        <entry key="JPA Palette" value="true" />
+        <entry key="JPA Structure" value="false" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectId" id="1xZab1WLMerDoOuxl5ZAB9ufG10" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../firstproject" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\user\Desktop\github\SpringBoot\hello-spring\hello-spring\src\main\resources\templates\members" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="hello.hellospring.service" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="hello.hellospring.service" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.MemberServiceIntegrationTest">
+    <configuration default="true" type="GroovyScriptRunConfiguration" factoryName="Groovy">
+      <setting name="path" value="" />
+      <setting name="vmparams" value="" />
+      <setting name="params" value="" />
+      <setting name="workDir" value="file://$PROJECT_DIR$" />
+      <setting name="debug" value="false" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MemberServiceIntegrationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="hello-spring.hello-spring.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="hello.hellospring.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="hello.hellospring.service" />
+      <option name="MAIN_CLASS_NAME" value="hello.hellospring.service.MemberServiceIntegrationTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MemberServiceIntegrationTest.DuplicateException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="hello-spring.hello-spring.test~1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="hello.hellospring.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="hello.hellospring.service" />
+      <option name="MAIN_CLASS_NAME" value="hello.hellospring.service.MemberServiceIntegrationTest" />
+      <option name="METHOD_NAME" value="DuplicateException" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MemberServiceTest.중복회원예외 (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="hello-spring.hello-spring.test~1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="hello.hellospring.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="hello.hellospring.service" />
+      <option name="MAIN_CLASS_NAME" value="hello.hellospring.service.MemberServiceTest" />
+      <option name="METHOD_NAME" value="중복회원예외" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MemberServiceTest.중복회원예외" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="hello-spring.hello-spring.test~1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="hello.hellospirng.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="hello.hellospirng.service" />
+      <option name="MAIN_CLASS_NAME" value="hello.hellospirng.service.MemberServiceTest" />
+      <option name="METHOD_NAME" value="중복회원예외" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MemberServiceTest.회원가입" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="hello-spring.hello-spring.test~1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="hello.hellospring.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="hello.hellospring.service" />
+      <option name="MAIN_CLASS_NAME" value="hello.hellospring.service.MemberServiceTest" />
+      <option name="METHOD_NAME" value="회원가입" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="HelloSpringApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="hello-spring.hello-spring.main~1" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="hello.hellospring.HelloSpringApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="HelloSpringApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="hello-spring.hello-spring.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="hello.hellospring.HelloSpringApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.MemberServiceTest.중복회원예외 (1)" />
+        <item itemvalue="JUnit.MemberServiceTest.중복회원예외" />
+        <item itemvalue="JUnit.MemberServiceIntegrationTest.DuplicateException" />
+        <item itemvalue="JUnit.MemberServiceIntegrationTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4fea05f6-45a9-4aa7-88e1-0b1ce15096ec" name="Changes" comment="" />
+      <created>1630565131890</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1630565131890</updated>
+      <workItem from="1630565133160" duration="15936000" />
+      <workItem from="1630760695283" duration="144000" />
+      <workItem from="1630832562975" duration="14819000" />
+      <workItem from="1631075601566" duration="13589000" />
+      <workItem from="1631272483442" duration="34522000" />
+      <workItem from="1631686421908" duration="11571000" />
+      <workItem from="1632390528838" duration="43000" />
+      <workItem from="1632391292495" duration="129000" />
+      <workItem from="1632701070142" duration="192000" />
+      <workItem from="1636897540622" duration="508000" />
+      <workItem from="1636898132490" duration="15000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/hello-spring/src/test/java/hello/hellospring/service/MemberServiceTest.java</url>
+          <line>47</line>
+          <properties class="hello.hellospring.service.MemberServiceTest" method="중복회원예외">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/hello_spring$hello_html.dat" NAME="hello.html Coverage Results" MODIFIED="1630584362130" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="WipCoverageRunner" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+  </component>
+</project>
