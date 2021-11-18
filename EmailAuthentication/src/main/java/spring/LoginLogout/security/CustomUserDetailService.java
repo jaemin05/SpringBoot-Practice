@@ -1,15 +1,12 @@
-package spring.emailauthentication.security;
+package spring.LoginLogout.security;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.bytecode.enhance.spi.UnloadedField;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import spring.emailauthentication.repository.UserRepository;
+import spring.LoginLogout.repository.UserRepository;
 
 @Service
 @RequiredArgsConstructor
