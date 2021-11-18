@@ -1,4 +1,4 @@
-package spring.emailauthentication.domain;
+package spring.LoginLogout.domain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,15 +9,15 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import spring.emailauthentication.dto.UserDto;
-import spring.emailauthentication.enums.Gender;
+import spring.LoginLogout.dto.UserDto;
+import spring.LoginLogout.enums.Gender;
 
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
 @Getter
-@Entity
+@Entity(name = "user")
 @NoArgsConstructor
 public class User implements UserDetails {
 
@@ -40,12 +40,13 @@ public class User implements UserDetails {
     //private List<Thumbnail> thumbnailList = new ArrayList<>();
 
     @Builder
-    public User(String email, String password, String phoneNumber, String name, Gender gender){
+    public User(String email, String password, String phoneNumber, String name, Gender gender, List<String> roles) {
         this.email = email;
         this.password = password;
         this.phoneNumber = phoneNumber;
         this.name = name;
         this.gender = gender;
+        this.roles = roles;
     }
 
 
@@ -84,14 +85,5 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
-    }
-
-    public User updateInfo(UserDto userDto) {
-        this.email = email;
-        this.name = name;
-        this.gender = gender;
-        this.phoneNumber = phoneNumber;
-        this.password = password;
-        return this;
     }
 }
