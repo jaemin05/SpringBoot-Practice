@@ -1,4 +1,4 @@
-package spring.emailauthentication.enums;
+package spring.LoginLogout.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
