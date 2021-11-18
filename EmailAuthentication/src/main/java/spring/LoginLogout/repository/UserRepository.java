@@ -1,7 +1,7 @@
-package spring.emailauthentication.repository;
+package spring.LoginLogout.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import spring.emailauthentication.domain.User;
+import spring.LoginLogout.domain.User;
 
 import java.util.Optional;
 
