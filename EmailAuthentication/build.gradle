@@ -35,9 +35,9 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-redis:2.5.6'
 
     implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor:2.5.6'
 
-}
-
-test {
-    useJUnitPlatform()
+    test {
+        useJUnitPlatform()
+    }
 }
