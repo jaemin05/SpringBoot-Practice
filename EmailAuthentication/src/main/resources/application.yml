@@ -9,9 +9,9 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: ${MySQL_URL}
-    username: ${MySQL_USERNAME}
-    password: ${MySQL_PASSWORD}
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
 
   jpa:
     hibernate:
@@ -19,12 +19,15 @@ spring:
       ddl-auto: update
     show-sql: true
 
+  redis:
+    port: ${REDIS_PORT}
+    host: ${REDIS_HOST}
 
   mail:
     host: smtp.gmail.com
     port: 587
-    username: ${MAIL_USERNAME}
-    password: ${MAIL_PASSWORD}
+    username: ${EMAIL}
+    password: ${PWD}
     properties:
       mail:
         smtp:
