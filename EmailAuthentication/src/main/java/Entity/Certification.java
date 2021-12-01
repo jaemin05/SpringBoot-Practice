@@ -35,7 +35,4 @@ public class Certification implements Serializable {
     }
 
 
-
-
-
 }
