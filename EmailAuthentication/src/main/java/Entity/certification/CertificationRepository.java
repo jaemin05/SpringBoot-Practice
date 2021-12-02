@@ -1,4 +1,4 @@
-package Entity;
+package Entity.certification;
 
 import org.springframework.data.repository.CrudRepository;
 

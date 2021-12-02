@@ -1,4 +1,4 @@
-package Entity;
+package Entity.certification;
 
 public enum Certified {
     CERTIFIED, NOT_CERRIFED

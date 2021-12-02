@@ -8,7 +8,7 @@ import javax.validation.constraints.NotBlank;
 
 @Getter
 @NoArgsConstructor
-public class EmailCertifiedRequest {
+public class EmailVerifiedRequest {
     @Email
     @NotBlank
     private String email;

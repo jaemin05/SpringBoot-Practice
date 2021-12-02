@@ -1,4 +1,4 @@
-package Entity;
+package Entity.certification;
 
 
 import lombok.AllArgsConstructor;
@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
+import org.springframework.data.redis.core.TimeToLive;
 import org.springframework.data.redis.core.index.Indexed;
 
 import java.io.Serializable;
@@ -20,6 +21,9 @@ public class Certification implements Serializable {
     @Id
     @Indexed
     private String email;
+
+    @TimeToLive
+    private Integer codeExp;
 
     private String code;
     private Certified cerified;
