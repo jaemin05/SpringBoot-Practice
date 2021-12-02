@@ -1,8 +1,8 @@
 package service.mail;
 
-import Entity.Certification;
-import Entity.CertificationRepository;
-import Entity.Certified;
+import Entity.certification.Certification;
+import Entity.certification.CertificationRepository;
+import Entity.certification.Certified;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.mail.javamail.JavaMailSender;
