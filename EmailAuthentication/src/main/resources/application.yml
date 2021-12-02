@@ -37,3 +37,6 @@ spring:
           ssl:
             trust: smtp.gmail.com
             protocols: TLSv1.2
+
+code:
+  exp: ${EXP}
