@@ -26,10 +26,10 @@ public class Certification implements Serializable {
     private Integer codeExp;
 
     private String code;
-    private Certified cerified;
+    private Certified certified;
 
-    public Certification updateCretified(Certified cerified) {
-        this.cerified = cerified;
+    public Certification updateCertified(Certified certified) {
+        this.certified = certified;
         return this;
     }
 
