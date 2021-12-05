@@ -3,6 +3,7 @@ package service.mail;
 import Entity.certification.Certification;
 import Entity.certification.CertificationRepository;
 import Entity.certification.Certified;
+import exception.SendMessageFailedException;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -33,7 +34,7 @@ public class EmailServiceImpl implements EmailService{
             return code;
         } catch (MessagingException e) {
             e.getStackTrace();
-            throw new 오류메시지;
+            throw new SendMessageFailedException();
         }
     }
 
@@ -45,7 +46,7 @@ public class EmailServiceImpl implements EmailService{
                 .orElseGet(() -> certificationRepository.save(Certification.builder()
                         .code(sendCode(email))
                         .email(email)
-                        .cerified(Certified.NOT_CERRIFED)
+                        .certified(Certified.NOT_CERTIFED)
                         .build())
                 );
     }
