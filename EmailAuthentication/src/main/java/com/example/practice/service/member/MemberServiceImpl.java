@@ -6,14 +6,15 @@ import com.example.practice.Entity.certification.Certified;
 import com.example.practice.Entity.member.Member;
 import com.example.practice.Entity.member.MemberRepository;
 import com.example.practice.exception.*;
+import com.example.practice.payload.EmailRequest;
+import com.example.practice.payload.EmailVerifiedRequest;
+import com.example.practice.payload.MemberRequest;
+import com.example.practice.payload.PasswordRequest;
+import com.example.practice.service.mail.EmailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.example.practice.payload.EmailRequest;
-import com.example.practice.payload.EmailVerifiedRequest;
-import com.example.practice.payload.MemberRequest;
-import com.example.practice.service.mail.EmailService;
 
 @Service
 @RequiredArgsConstructor
@@ -26,9 +27,8 @@ public class MemberServiceImpl implements MemberService {
     @Override
     @Transactional
     public void sendEmail(EmailRequest emailRequest) {
-        if(certificationRepository.findByEmail(emailRequest.getEmail()).isPresent())
+        if (certificationRepository.findByEmail(emailRequest.getEmail()).isPresent())
             throw new MemberEmailAlreadyExistsException();
-        System.out.println("member com.example.practice.service");
         emailService.sendEmail(emailRequest.getEmail());
     }
 
@@ -37,19 +37,19 @@ public class MemberServiceImpl implements MemberService {
         certificationRepository.findByEmail(request.getEmail())
                 .filter(c -> request.getCode().equals(c.getCode()))
                 .map(certification -> certificationRepository.save(certification.updateCertified(Certified.CERTIFIED)))
-                .orElseThrow(CodeNotCorrectException::new);
+                .orElseThrow(() -> CodeNotCorrectException.EXCEPTION);
     }
 
     @Override
     @Transactional
     public void signup(MemberRequest request) {
-        if(memberRepository.findByEmail(request.getEmail()).isPresent())
+        if (memberRepository.findByEmail(request.getEmail()).isPresent())
             throw new MemberNameAlreadyExistsException();
 
         Certification certification = certificationRepository.findByEmail(request.getEmail())
-                .orElseThrow(CodeAlreadyExpiredException::new);
+                .orElseThrow(() -> CodeAlreadyExpiredException.EXCEPTION);
 
-        if(certification.getCertified() == (Certified.CERTIFIED)) {
+        if (certification.getCertified() == (Certified.CERTIFIED)) {
             memberRepository.save(Member.builder()
                     .email(request.getEmail())
                     .password(passwordEncoder.encode(request.getPassword()))
@@ -57,5 +57,16 @@ public class MemberServiceImpl implements MemberService {
         } else throw new EmailNotCertifiedException();
     }
 
+    @Transactional
+    public void passwordChange(PasswordRequest request) {
+        Member member = memberRepository.findByPassword(request.getPassword()).orElseThrow(PasswordNotFoundException::new);
 
+        if (!passwordEncoder.matches(request.getPassword(), member.getPassword())) {
+            throw new PasswordNotCorrectException();
+        }
+
+        memberRepository.save(member.updatePassword(passwordEncoder.encode(request.getChange())));
+
+
+    }
 }

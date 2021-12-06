@@ -1,5 +1,6 @@
 package com.example.practice.controller;
 
+import com.example.practice.payload.PasswordRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import com.example.practice.payload.EmailRequest;
@@ -16,7 +17,6 @@ public class EmailController {
 
     @PostMapping("/send")
     public void sendEmail(@Valid @RequestBody EmailRequest request){
-        System.out.println("controller");
         memberService.sendEmail(request);
     }
 
@@ -28,6 +28,11 @@ public class EmailController {
     @PostMapping("/signup")
     public void signup(@Valid @RequestBody MemberRequest request) {
         memberService.signup(request);
+    }
+
+    @PostMapping("/change")
+    public void change(@Valid @RequestBody PasswordRequest request) {
+        memberService.passwordChange(request);
     }
 
 }
