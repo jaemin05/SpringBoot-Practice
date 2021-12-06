@@ -1,0 +1,61 @@
+package com.example.practice.service.member;
+
+import com.example.practice.Entity.certification.Certification;
+import com.example.practice.Entity.certification.CertificationRepository;
+import com.example.practice.Entity.certification.Certified;
+import com.example.practice.Entity.member.Member;
+import com.example.practice.Entity.member.MemberRepository;
+import com.example.practice.exception.*;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import com.example.practice.payload.EmailRequest;
+import com.example.practice.payload.EmailVerifiedRequest;
+import com.example.practice.payload.MemberRequest;
+import com.example.practice.service.mail.EmailService;
+
+@Service
+@RequiredArgsConstructor
+public class MemberServiceImpl implements MemberService {
+    private final CertificationRepository certificationRepository;
+    private final MemberRepository memberRepository;
+    private final EmailService emailService;
+    private final PasswordEncoder passwordEncoder;
+
+    @Override
+    @Transactional
+    public void sendEmail(EmailRequest emailRequest) {
+        if(certificationRepository.findByEmail(emailRequest.getEmail()).isPresent())
+            throw new MemberEmailAlreadyExistsException();
+        System.out.println("member com.example.practice.service");
+        emailService.sendEmail(emailRequest.getEmail());
+    }
+
+    @Override
+    public void verifyAccount(EmailVerifiedRequest request) {
+        certificationRepository.findByEmail(request.getEmail())
+                .filter(c -> request.getCode().equals(c.getCode()))
+                .map(certification -> certificationRepository.save(certification.updateCertified(Certified.CERTIFIED)))
+                .orElseThrow(CodeNotCorrectException::new);
+    }
+
+    @Override
+    @Transactional
+    public void signup(MemberRequest request) {
+        if(memberRepository.findByEmail(request.getEmail()).isPresent())
+            throw new MemberNameAlreadyExistsException();
+
+        Certification certification = certificationRepository.findByEmail(request.getEmail())
+                .orElseThrow(CodeAlreadyExpiredException::new);
+
+        if(certification.getCertified() == (Certified.CERTIFIED)) {
+            memberRepository.save(Member.builder()
+                    .email(request.getEmail())
+                    .password(passwordEncoder.encode(request.getPassword()))
+                    .build());
+        } else throw new EmailNotCertifiedException();
+    }
+
+
+}
