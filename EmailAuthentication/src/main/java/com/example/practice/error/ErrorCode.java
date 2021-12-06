@@ -13,7 +13,10 @@ public enum ErrorCode {
     SEND_MESSAGE_FAILED(500, "Send Message Failed"),
 
     CODE_NOT_CORRECT(401, "Code Not Correct"),
-    CODE_ALREADY_EXPIRED(401, "Code Already Expired");
+    CODE_ALREADY_EXPIRED(401, "Code Already Expired"),
+
+    PASSWORD_NOT_CORRECT(401, "Password Not Correct"),
+    PASSWORD_NOT_FOUND(500, "Password Not Found");
 
     private int statues;
     private String message;
