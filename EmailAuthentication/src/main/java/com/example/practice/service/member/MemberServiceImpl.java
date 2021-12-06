@@ -59,14 +59,13 @@ public class MemberServiceImpl implements MemberService {
 
     @Transactional
     public void passwordChange(PasswordRequest request) {
-        Member member = memberRepository.findByPassword(request.getPassword()).orElseThrow(PasswordNotFoundException::new);
+        Member member = memberRepository.findByEmail(request.getEmail())
+                .orElseThrow(() -> MemberNotFoundException.Exception);
 
         if (!passwordEncoder.matches(request.getPassword(), member.getPassword())) {
             throw new PasswordNotCorrectException();
         }
 
         memberRepository.save(member.updatePassword(passwordEncoder.encode(request.getChange())));
-
-
     }
 }
