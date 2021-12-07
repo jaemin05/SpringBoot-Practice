@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
+import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -47,6 +48,7 @@ public class FileServiceImpl implements FileService{
                 init();
             }
             try (InputStream inputStream = file.getInputStream()) {
+                //StandardCopyOption.REPLACE_EXISTING : 파일이 이미 존재할 경우 덮어쓰기
                 Files.copy(inputStream, root.resolve(file.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
             }
         }catch (Exception e) {
@@ -78,7 +80,10 @@ public class FileServiceImpl implements FileService{
             throw FileNotFoundException.EXCEPTION;
         }
     }
+
     @Override
     public void deleteAll() {
+        //전체 파일 삭제
+        FileSystemUtils.deleteRecursively(Paths.get(uploadPath).toFile());
     }
 }
