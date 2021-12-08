@@ -1,7 +1,10 @@
 package com.example.fileupload.controller;
 
+import com.example.fileupload.exception.FileSetSizeException;
+import com.example.fileupload.payload.FileData;
 import com.example.fileupload.service.FileService;
 import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -11,11 +14,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
+
+import java.nio.file.Files;
+import java.util.List;
 
 import java.io.IOException;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @RestController
+@ToString
 public class FileController {
     private final FileService fileService;
 
@@ -38,8 +47,28 @@ public class FileController {
     public ResponseEntity<String> deleteAll() {
         /* 파일을 하나만 삭제하려면 StorageService Interface 에 추상 메소드 delete() 를 추가하고
         FileSystemStorageService.java 에 Override 해서 구현하고 사용하면 됩니다. */
-
         fileService.deleteAll();
         return new ResponseEntity<>("Success delete", HttpStatus.OK);
+    }
+
+    @GetMapping("fileList")
+    public ResponseEntity<List<FileData>> getListFiles() {
+        List<FileData> fileInfos = fileService.loadAll()
+                .map(path -> {
+                    FileData data = new FileData();
+                    String filename = path.getFileName().toString();
+                    data.setFilename(filename);
+                    data.setUrl(MvcUriComponentsBuilder
+                            .fromMethodName(FileController.class, "serveFile", filename).build().toString());
+                    try{
+                        data.setSize(String.valueOf(Files.size(path)));
+                    } catch (IOException e) {
+                        throw FileSetSizeException.Exception;
+                    }
+                    return data;
+                })
+                .collect(Collectors.toList());
+
+        return ResponseEntity.status(HttpStatus.OK).body(fileInfos);
     }
 }
