@@ -58,7 +58,14 @@ public class FileServiceImpl implements FileService{
 
     @Override
     public Stream<Path> loadAll() {
-        return null;
+        try{
+            Path root = Paths.get(uploadPath);
+            //파일 목록 가져오기
+            return Files.walk(root, 1)
+                    .filter(path -> !path.equals(root));
+        } catch (IOException e){
+            throw FileNotStoreException.Exception;
+        }
     }
 
     @Override
