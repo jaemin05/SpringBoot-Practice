@@ -1,4 +1,8 @@
 spring:
+  profiles:
+    include:
+        - aws
+        - credentials
   servlet:
     multipart:
       enabled: true
@@ -8,3 +12,15 @@ spring:
 file:
   upload:
     location: /Users/user/Desktop
+
+cloud:
+  aws:
+    credentials:
+      accessKey: AKIA4WDD7VUU7N2YH5NZ
+      secretKey: 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
+    s3:
+      bucket: jaeminstorage
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
