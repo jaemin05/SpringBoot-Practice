@@ -5,6 +5,6 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.QueryByExampleExecutor;
 
 @NoRepositoryBean
-public interface JpaRepository<T, ID> extends PagingAndSortingRepository<T,ID>, QueryByExampleExecutor<T> {
+public interface JpaRepository<T, ID> extends PagingAndSortingRepository<T, ID>, QueryByExampleExecutor<T> {
 
 }

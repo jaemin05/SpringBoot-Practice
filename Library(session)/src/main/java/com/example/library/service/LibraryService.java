@@ -2,6 +2,7 @@ package com.example.library.service;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import com.example.library.Repository.AuthorRepository;
 import com.example.library.Repository.BookRepository;
 import com.example.library.Repository.LendRepository;
@@ -28,7 +29,7 @@ public class LibraryService {
 
     public Book readBook(Long id) {
         Optional<Book> book = bookRepository.findById(id);
-        if(book.isPresent()) {
+        if (book.isPresent()) {
             return book.get();
         }
         throw new EntityNotFoundException("Cant find any book under given ID");
@@ -40,7 +41,7 @@ public class LibraryService {
 
     public Book readBood(String isbn) {
         Optional<Book> book = bookRepository.findByIsbn(isbn);
-        if(book.isPresent()){
+        if (book.isPresent()) {
             return book.get();
         }
 
@@ -49,7 +50,7 @@ public class LibraryService {
 
     public Book createBook(BookCreationRequest book) {
         Optional<Author> author = authorRepository.findById(book.getAuthorId());
-        if(!author.isPresent()){
+        if (!author.isPresent()) {
             throw new EntityNotFoundException(
                     "Author Not Found");
         }
@@ -73,7 +74,7 @@ public class LibraryService {
 
     public Member updateMember(Long id, MemberCreationRequest request) {
         Optional optionalMember = memberRepository.findById(id);
-        if(!optionalMember.isPresent()) {
+        if (!optionalMember.isPresent()) {
             throw new EntityNotFoundException(
                     "Member not present in the database");
         }
@@ -90,27 +91,27 @@ public class LibraryService {
         return authorRepository.save(author);
     }
 
-    public List<String> lendABook (BookLendRequest list) {
+    public List<String> lendABook(BookLendRequest list) {
         List<String> booksApprovedToBurrow = new ArrayList<>();
         List.forEach(bookLendRequest -> {
             Optional<Book> bookForId = bookLendRequest.findById(bookLendRequest.getBookId());
-            if(!bookForId.isPresent()) {
+            if (!bookForId.isPresent()) {
                 throw new EntityNotFoundException("Cant find any book under given ID");
             }
 
             Optional<Member> memberForId = memberRepository.findById(bookLendRequest.getMemberId());
-            if(!memberForId.isPresent()) {
+            if (!memberForId.isPresent()) {
                 throw new EntityNotFoundException("Member not present in the database");
             }
 
             Member member = memberForId.get();
-            if(member.getStatus() != MemberStatus.ACTIVE) {
+            if (member.getStatus() != MemberStatus.ACTIVE) {
                 throw new RuntimeException("User is not active to proceed a lending.");
             }
 
             Optional<Lend> burrowedBook = lendRepository.findByBookAndStatus(bookForId.get(), LendStatus.BURROWED);
 
-            if(!burrowedBook.isPresent()) {
+            if (!burrowedBook.isPresent()) {
                 booksApprovedToBurrow.add(bookForId.get().getName());
                 Lend lend = new Lend();
                 lend.setMember(memberForId.get());
@@ -123,9 +124,6 @@ public class LibraryService {
         });
         return booksApprovedToBurrow;
     }
-
-
-
 
 
 }
