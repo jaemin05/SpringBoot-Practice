@@ -21,7 +21,7 @@ public class MemberController {
     }
 
     @PostMapping("/member/login")
-    public TokenDto login(@RequestBody MemberDto memberDto){
+    public TokenDto login(@RequestBody MemberDto memberDto) {
         return memberService.login(memberDto);
     }
 }

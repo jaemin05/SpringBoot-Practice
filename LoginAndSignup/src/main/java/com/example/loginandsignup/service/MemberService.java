@@ -30,7 +30,7 @@ public class MemberService {
     public TokenDto login(MemberDto memberDto) {
         Member member = memberRepository.findByUsername(memberDto.getUsername()).get();
 
-        if(!passwordEncoder.matches(memberDto.getPassword(), member.getPassword())) {
+        if (!passwordEncoder.matches(memberDto.getPassword(), member.getPassword())) {
             throw new IllegalArgumentException("Login Failed");
         }
 
