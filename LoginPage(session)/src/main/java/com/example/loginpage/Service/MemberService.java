@@ -48,7 +48,7 @@ public class MemberService implements UserDetailsService {
         }
 
         //아이디 비미번호 권한 리스트를 매개변수로 User를 만들어 반환
-        return new User(member.getUsername(),member.getPassword(), authorities);
+        return new User(member.getUsername(), member.getPassword(), authorities);
     }
 
 

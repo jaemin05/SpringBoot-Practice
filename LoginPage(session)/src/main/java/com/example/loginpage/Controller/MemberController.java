@@ -15,7 +15,7 @@ public class MemberController {
     private MemberService memberService;
 
     @GetMapping("/")
-    public String index(){
+    public String index() {
         return "/home/index";
     }
 
@@ -27,7 +27,7 @@ public class MemberController {
     }
 
     @GetMapping("/home/index")
-    public String index(Model model){
+    public String index(Model model) {
         model.addAttribute("member", new MemberDto());
         return "/home/index";
     }

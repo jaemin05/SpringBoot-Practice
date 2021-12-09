@@ -27,10 +27,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override//상위클래스에서 선언된 한
-    public void configure(WebSecurity web) throws Exception{
+    public void configure(WebSecurity web) throws Exception {
         //인증을 무시하기 위한 설정
-        web.ignoring().antMatchers("/css/**","/js/**","/ing/**","/lib/**");
+        web.ignoring().antMatchers("/css/**", "/js/**", "/ing/**", "/lib/**");
     }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
