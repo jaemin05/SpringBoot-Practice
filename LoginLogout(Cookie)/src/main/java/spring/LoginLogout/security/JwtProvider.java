@@ -58,7 +58,7 @@ public class JwtProvider {
     public String resolveToken(HttpServletRequest request) {
         String token = null;
         Cookie cookie = WebUtils.getCookie(request, "X-AUTH-TOKEN");
-        if(cookie != null) token = cookie.getValue();
+        if (cookie != null) token = cookie.getValue();
         return token;
     }
 

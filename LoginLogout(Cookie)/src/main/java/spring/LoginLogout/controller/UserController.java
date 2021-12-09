@@ -29,7 +29,7 @@ public class UserController {
     private JwtProvider jwtAuthenticationProvider;
 
     @PostMapping("/join")
-    public void join(@RequestBody UserDto user){
+    public void join(@RequestBody UserDto user) {
         userRepository.save(User.builder()
                 .email(user.getEmail())
                 .password(passwordEncoder.encode(user.getPassword()))
@@ -62,7 +62,7 @@ public class UserController {
     }
 
     @PostMapping("/logout")
-    public void logout(HttpServletResponse response){
+    public void logout(HttpServletResponse response) {
         Cookie cookie = new Cookie("X-AUTH-TOKEN", null);
         cookie.setHttpOnly(true);
         cookie.setSecure(false);
@@ -72,9 +72,9 @@ public class UserController {
     }
 
     @GetMapping("/info")
-    public UserDto getInfo(){
+    public UserDto getInfo() {
         Object details = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if(details != null && !(details instanceof  String)) return new UserDto((User) details);
+        if (details != null && !(details instanceof String)) return new UserDto((User) details);
         return null;
     }
 

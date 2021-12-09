@@ -21,10 +21,10 @@ public class UserDto {
 
 
     public UserDto(User member) {
-            this.email = member.getEmail();
-            this.password = member.getPassword();
-            this.phoneNumber = member.getPhoneNumber();
-            this.name = member.getName();
-            this.gender = member.getGender();
-        }
+        this.email = member.getEmail();
+        this.password = member.getPassword();
+        this.phoneNumber = member.getPhoneNumber();
+        this.name = member.getName();
+        this.gender = member.getGender();
+    }
 }
