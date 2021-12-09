@@ -16,7 +16,7 @@ public class EmailController {
     private final MemberService memberService;
 
     @PostMapping("/send")
-    public void sendEmail(@Valid @RequestBody EmailRequest request){
+    public void sendEmail(@Valid @RequestBody EmailRequest request) {
         memberService.sendEmail(request);
     }
 

@@ -15,7 +15,8 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(new ErrorResponse(errorCode.getMessage()), HttpStatus.valueOf(errorCode.getStatues()));
     }
 
-    @ExceptionHandler(MethodArgumentNotValidException.class) //Reqeust Body와 Valid 어노테이션을 통해서 client로 부터 가져온 정보들을 검증실패할 때
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    //Reqeust Body와 Valid 어노테이션을 통해서 client로 부터 가져온 정보들을 검증실패할 때
     public ResponseEntity<ErrorResponse> handleValidException(MethodArgumentNotValidException e) {
         return new ResponseEntity<>(
                 new ErrorResponse(e.getBindingResult().getAllErrors().get(0).getDefaultMessage()), HttpStatus.BAD_REQUEST);

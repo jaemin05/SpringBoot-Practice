@@ -16,14 +16,14 @@ public class Member extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable =false) //unique : 값이 유일
+    @Column(unique = true, nullable = false) //unique : 값이 유일
     private String email;
 
     @Column(unique = true, nullable = false)
     private String password;
 
     @Builder
-    public Member(String email, String password){
+    public Member(String email, String password) {
         this.email = email;
         this.password = password;
     }

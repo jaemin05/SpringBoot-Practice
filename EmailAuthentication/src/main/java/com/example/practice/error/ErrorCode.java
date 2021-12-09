@@ -10,7 +10,7 @@ public enum ErrorCode {
     MEMBER_EMAIL_ALREADY_EXISTS(409, "Member Email Already Exists"),
     MEMBER_NOT_FOUND(500, "Member Not Found"),
 
-    EMAIL_NOT_CERTIFIED(401,"Email Not certified"),
+    EMAIL_NOT_CERTIFIED(401, "Email Not certified"),
     SEND_MESSAGE_FAILED(500, "Send Message Failed"),
 
     CODE_NOT_CORRECT(401, "Code Not Correct"),

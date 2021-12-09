@@ -10,13 +10,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 @Service
 @RequiredArgsConstructor
-public class EmailServiceImpl implements EmailService{
+public class EmailServiceImpl implements EmailService {
 
     @Value("${code.exp}")
     private Integer CODE_EXP;
@@ -27,7 +28,7 @@ public class EmailServiceImpl implements EmailService{
     public String sendCode(String email) {
         MimeMessage message = javaMailSender.createMimeMessage();
 
-        try{
+        try {
             String code = getCode(createKey());
             message.setFrom("lovesjm2005@gmail.com");
             message.addRecipients(Message.RecipientType.TO, email);
@@ -62,6 +63,6 @@ public class EmailServiceImpl implements EmailService{
     }
 
     public String getCode(String key) {
-        return key.substring(0,3) + "-" + key.substring(3,6);
+        return key.substring(0, 3) + "-" + key.substring(3, 6);
     }
 }

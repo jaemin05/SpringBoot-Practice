@@ -14,11 +14,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableRedisRepositories
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
     @Override
-    protected void configure(HttpSecurity http) throws Exception{
+    protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
                 .formLogin().disable()
@@ -30,7 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/send").permitAll()
                 .antMatchers(HttpMethod.POST, "/verify").permitAll()
-                .antMatchers(HttpMethod.POST,"/signup").permitAll()
+                .antMatchers(HttpMethod.POST, "/signup").permitAll()
                 .antMatchers(HttpMethod.POST, "/change").permitAll()
                 .anyRequest().authenticated();
     }

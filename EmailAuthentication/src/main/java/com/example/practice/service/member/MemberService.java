@@ -7,7 +7,10 @@ import com.example.practice.payload.PasswordRequest;
 
 public interface MemberService {
     void sendEmail(EmailRequest request);
+
     void verifyAccount(EmailVerifiedRequest request);
+
     void signup(MemberRequest request);
+
     void passwordChange(PasswordRequest request);
 }
