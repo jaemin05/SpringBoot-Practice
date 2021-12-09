@@ -9,10 +9,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
@@ -38,8 +35,8 @@ public class FileController {
     public ResponseEntity<Resource> serveFile(@RequestParam(value = "filename") String filename) {
         Resource file = fileService.loadAsResource(filename);
         return ResponseEntity.ok().header( //CONTENT_DISPOSITION : 웹페이지에서 HTTP 프로토콜이 응답하는 데이터를 어떻게 표시하는지 알려주는 Header
-                //attachment : 사용자가 로컬에서 다운로드할 수 있도록 해준다
-                HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"")
+                        //attachment : 사용자가 로컬에서 다운로드할 수 있도록 해준다
+                        HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"")
                 .body(file);
     }
 
@@ -60,7 +57,7 @@ public class FileController {
                     data.setFilename(filename);
                     data.setUrl(MvcUriComponentsBuilder
                             .fromMethodName(FileController.class, "serveFile", filename).build().toString());
-                    try{
+                    try {
                         data.setSize(String.valueOf(Files.size(path)));
                     } catch (IOException e) {
                         throw FileSetSizeException.Exception;
