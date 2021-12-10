@@ -12,10 +12,10 @@ file:
 cloud:
   aws:
     credentials:
-      accessKey: AKIA4WDD7VUU7N2YH5NZ
-      secretKey: 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
+      accessKey: ${IAM_ACCESS_KEY}
+      secretKey: ${IAM_SECRET_KEY}
     s3:
-      bucket: jaeminbucket
+      bucket: ${BUCKET}
     region:
       static: ap-northeast-2
     stack:
