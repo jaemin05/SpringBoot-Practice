@@ -1,8 +1,4 @@
 spring:
-  profiles:
-    include:
-        - aws
-        - credentials
   servlet:
     multipart:
       enabled: true
@@ -19,7 +15,7 @@ cloud:
       accessKey: AKIA4WDD7VUU7N2YH5NZ
       secretKey: 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
     s3:
-      bucket: jaeminstorage
+      bucket: jaeminbucket
     region:
       static: ap-northeast-2
     stack:
