@@ -1,5 +1,6 @@
 package com.example.socket.payload.request;
 
+import com.example.socket.entity.chat.RoomType;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
