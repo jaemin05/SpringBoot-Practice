@@ -7,7 +7,7 @@ spring:
       max-request-size: 100MB
 file:
   upload:
-    location: /Users/user/Desktop
+    location: Users/user/Desktop
 
 cloud:
   aws:
