@@ -1,16 +1,16 @@
 package com.example.socket.entity;
 
+import com.example.socket.payload.response.MyInfoResponse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @AllArgsConstructor
@@ -54,4 +54,38 @@ public class Member {
     private Role role;
 
     private String salt;
+
+    @ElementCollection
+    private List<String> user = new ArrayList<>();
+
+
+    public void phone(String phone){
+        this.phone = phone;
+    }
+
+    public void updateMember(String name, LocalDate birth, String info){
+        this.name = name;
+        this.birth = birth;
+        this.info = info;
+    }
+
+    public void editInfo(String info){
+        this.info = info;
+    }
+
+    public MyInfoResponse toMyInfoResponse(Member member){
+        return MyInfoResponse.builder()
+                .id(member.getId())
+                .name(member.getName())
+                .profile(member.getPicture())
+                .birth(member.getBirth())
+                .info(member.getInfo())
+                .build();
+    }
+
+    public String updateProfile(String profileUrl){
+        this.picture = profileUrl;
+        return profileUrl;
+    }
+
 }
