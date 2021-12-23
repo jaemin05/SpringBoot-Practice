@@ -57,7 +57,7 @@ public class SocketServiceImpl implements SocketService{
 
     @Override
     public void disconnect(SocketIOClient client) {
-
+        errorAndDisconnected(client, "Success to disconnect", 204);
     }
 
     @Override
