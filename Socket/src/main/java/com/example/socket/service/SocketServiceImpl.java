@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class SocketServiceImpl {
+public class SocketServiceImpl implements SocketService{
     private final SocketIOServer server;
     private final MemberRepository memberRepository;
     private final TokenProvider tokenProvider;
@@ -53,6 +53,41 @@ public class SocketServiceImpl {
         }catch (Exception e) {
             errorAndDisconnected(client, "User Not Found", 404);
         }
+    }
+
+    @Override
+    public void disconnect(SocketIOClient client) {
+
+    }
+
+    @Override
+    public void joinRoom(SocketIOClient client, String json) {
+
+    }
+
+    @Override
+    public void joinUserRoom(SocketIOClient client, String json) {
+
+    }
+
+    @Override
+    public void leaveRoom(SocketIOClient client, String json) {
+
+    }
+
+    @Override
+    public void sendMessage(SocketIOClient client, String json) {
+
+    }
+
+    @Override
+    public void changeTitle(SocketIOClient client, String json) {
+
+    }
+
+    @Override
+    public void sendNotice(SocketIOClient client, String json) {
+
     }
 
     private void logging(String message) {
