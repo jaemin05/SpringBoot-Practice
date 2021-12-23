@@ -3,9 +3,12 @@ package com.example.socket.service;
 import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
 import com.example.socket.entity.Member;
+import com.example.socket.entity.Role;
 import com.example.socket.entity.chat.Room;
+import com.example.socket.entity.chat.RoomType;
 import com.example.socket.error.ErrorResponse;
 import com.example.socket.exception.MemberNotFoundException;
+import com.example.socket.payload.request.JoinChatRoomRequest;
 import com.example.socket.repository.ChatRepository;
 import com.example.socket.repository.MemberRepository;
 import com.example.socket.repository.RoomRepository;
@@ -61,8 +64,46 @@ public class SocketServiceImpl implements SocketService{
     }
 
     @Override
+    @Transactional
     public void joinRoom(SocketIOClient client, String json) {
+        String memberId = client.get("member");
+        Member member = memberRepository.findById(memberId).orElse(null);
+        if(member == null) {
+            errorAndDisconnected(client, "User Not Found", 404);
+            return;
+        }
+        JoinChatRoomRequest joinChatRoomRequest;
+        try{
+            joinChatRoomRequest = objectMapper.readValue(json, JoinChatRoomRequest.class);
+        } catch(Exception e){
+            errorAndDisconnected(client, "User Not Found", 404);
+            return;
+        }
 
+        if(joinChatRoomRequest != null){
+            Room room = null;
+            if(!(joinChatRoomRequest.getRoomId()==null)){
+                room = roomRepository.findById(joinChatRoomRequest.getRoomId())
+                        .orElse(null);
+            }
+            String title;
+            Role authority;
+            RoomType category;
+
+            if(room != null){
+                if(roomRepository.existsByIdAndMembersContaining(room.getId(), member)) {
+                    errorAndDisconnected(client, "유저가 이미 존재합니다", 404);
+                    return;
+                }
+                title=room.getName();
+                authority=Role.ROLE_USER;
+                category=room.getRoomType();
+                roomRepository.save(room.memberAdd(member));
+            }else {
+                errorAndDisconnected(client,"채팅방이 존재하지 않습니다", 404);
+            }
+            
+        }
     }
 
     @Override
