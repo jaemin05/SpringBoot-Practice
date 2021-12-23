@@ -8,6 +8,11 @@ import lombok.Getter;
 public enum ErrorCode {
     ROOM_NOT_FOUND(500, "ChattingRoom Not Found"),
     MEMBER_NOT_FOUND(500, "Member Not Found");
-    private int statues;
+
+    private int status;
     private String message;
+
+    public int getStatus() {
+        return 0;
+    }
 }
