@@ -1,14 +1,14 @@
 package com.example.socket.service;
 
-import com.corundumstudio.socketio.SocketIOServer;
+import com.corundumstudio.socketio.SocketIOClient;
 
 public interface SocketService {
-    void connect(SocketIOServer client);
-    void disconnect(SocketIOServer client);
-    void joinRoom(SocketIOServer client, String json);
-    void joinUserRoom(SocketIOServer client, String json);
-    void leaveRoom(SocketIOServer client, String json);
-    void sendMessage(SocketIOServer client, String json);
-    void changeTitle(SocketIOServer client, String json);
-    void sendNotice(SocketIOServer client, String json);
+    void connect(SocketIOClient client);
+    void disconnect(SocketIOClient client);
+    void joinRoom(SocketIOClient client, String json);
+    void joinUserRoom(SocketIOClient client, String json);
+    void leaveRoom(SocketIOClient client, String json);
+    void sendMessage(SocketIOClient client, String json);
+    void changeTitle(SocketIOClient client, String json);
+    void sendNotice(SocketIOClient client, String json);
 }
