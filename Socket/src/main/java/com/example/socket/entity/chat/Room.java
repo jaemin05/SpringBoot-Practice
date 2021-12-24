@@ -41,6 +41,9 @@ public class Room {
 
     private String info;
 
+    @NotNull
+    private MeetingCategory category;
+
     @ManyToMany
     @JsonBackReference
     private List<Member> members;
