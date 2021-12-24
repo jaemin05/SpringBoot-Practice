@@ -4,10 +4,7 @@ import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
 import com.example.socket.entity.Member;
 import com.example.socket.entity.Role;
-import com.example.socket.entity.chat.Chat;
-import com.example.socket.entity.chat.ChatType;
-import com.example.socket.entity.chat.Room;
-import com.example.socket.entity.chat.RoomType;
+import com.example.socket.entity.chat.*;
 import com.example.socket.error.ErrorResponse;
 import com.example.socket.exception.MemberNotFoundException;
 import com.example.socket.payload.request.JoinChatRoomRequest;
@@ -25,6 +22,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Service
 @Slf4j
@@ -142,8 +140,45 @@ public class SocketServiceImpl implements SocketService{
         try{
             joinUserRoomRequest = objectMapper.readValue(json, JoinUserRoomRequest.class);
         }catch (Exception e) {
-            errorAndDisconnected(client, "Bad Request", 404);
+            errorAndDisconnected(client, "Bad Request", 400);
             return;
+        }
+
+        if(joinUserRoomRequest != null) {
+            Room room = null;
+            if(!(joinUserRoomRequest.getRoomId()==null)){
+                room = roomRepository.findById(joinUserRoomRequest.getRoomId()).orElse(null);
+            }
+            String title;
+            Role authority;
+            RoomType chatType;
+
+            if(room != null){
+                if(memberRepository.findByIdAndUserContaining(room.getId(), joinUserRoomRequest.getUsedPk()).isEmpty()){
+                    errorAndDisconnected(client, "Member Not Exists", 404);
+                }
+                if(roomRepository.existsByIdAndMembersContaining(room.getId(), member)){
+                    errorAndDisconnected(client, "유저가 이미 존재합니다", 404);
+                    return;
+                }
+                title = room.getName();
+                authority = Role.ROLE_USER;
+                chatType = room.getRoomType();
+                roomRepository.save(room.memberAdd(member));
+            } else {
+                room = roomRepository.save(
+                        Room.builder()
+                                .id(String.valueOf(UUID.randomUUID()))
+                                .name("채탱방")
+                                .category(MeetingCategory.ELSE)
+                                .admin(memberId)
+                                .info(memberId + "님의 채팅방")
+                                .onOffline(OnOffline.ONLINE)
+                                .roomType(RoomType.USER)
+                                .build().memberAdd(member)
+                );
+            }
+
         }
 
 
