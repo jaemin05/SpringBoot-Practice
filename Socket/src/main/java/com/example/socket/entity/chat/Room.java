@@ -63,6 +63,11 @@ public class Room {
     @OneToMany(mappedBy = "room", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Chat> chats;
 
+    public Room chatCountAdd(){
+        this.chatCount++;
+        return this;
+    }
+
     public Room changeRoomName(String roomName) {
         this.name = roomName;
         return this;
