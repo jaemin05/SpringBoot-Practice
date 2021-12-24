@@ -4,5 +4,5 @@ public enum RoomType {
     MEETING,
     PLACE,
     GOODS,
-    FRIENDS
+    USER
 }
