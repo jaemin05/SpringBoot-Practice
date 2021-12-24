@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class JoinRoomRequest {
+public class JoinUserRoomRequest {
     private String PK;
     private String roomId;
     private RoomType roomType;
