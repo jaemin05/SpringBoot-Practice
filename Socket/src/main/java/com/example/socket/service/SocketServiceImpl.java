@@ -4,11 +4,16 @@ import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
 import com.example.socket.entity.Member;
 import com.example.socket.entity.Role;
+import com.example.socket.entity.chat.Chat;
+import com.example.socket.entity.chat.ChatType;
 import com.example.socket.entity.chat.Room;
 import com.example.socket.entity.chat.RoomType;
 import com.example.socket.error.ErrorResponse;
 import com.example.socket.exception.MemberNotFoundException;
 import com.example.socket.payload.request.JoinChatRoomRequest;
+import com.example.socket.payload.request.JoinUserRoomRequest;
+import com.example.socket.payload.request.MessageRequest;
+import com.example.socket.payload.response.MessageResponse;
 import com.example.socket.repository.ChatRepository;
 import com.example.socket.repository.MemberRepository;
 import com.example.socket.repository.RoomRepository;
@@ -18,6 +23,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
 
 @Service
 @Slf4j
@@ -102,12 +109,43 @@ public class SocketServiceImpl implements SocketService{
             }else {
                 errorAndDisconnected(client,"채팅방이 존재하지 않습니다", 404);
             }
-            
+            client.joinRoom(String.valueOf(room.getId()));
+            logging(member.getName() + "님이 " + room.getName() + "에 입장하였습니다");
+
+            Chat chat = chatRepository.save(
+                    Chat.builder()
+                            .room(room)
+                            .message(member.getName() + "님이 입장하였습니다")
+                            .chatType(ChatType.SYSTEM)
+                            .createAt(LocalDateTime.now())
+                            .senderId(member.getId())
+                            .build()
+            );
+            sendSys(chat, room);
+        }else {
+            errorAndDisconnected(client, "Bad Request", 400);
         }
     }
 
+    @Transactional
     @Override
     public void joinUserRoom(SocketIOClient client, String json) {
+        String memberId = client.get("member");
+        Member member = memberRepository.findById(memberId).orElse(null);
+        if(member == null){
+            errorAndDisconnected(client, "User Not Found", 404);
+            return;
+        }
+
+        JoinUserRoomRequest joinUserRoomRequest;
+
+        try{
+            joinUserRoomRequest = objectMapper.readValue(json, JoinUserRoomRequest.class);
+        }catch (Exception e) {
+            errorAndDisconnected(client, "Bad Request", 404);
+            return;
+        }
+
 
     }
 
@@ -129,6 +167,22 @@ public class SocketServiceImpl implements SocketService{
     @Override
     public void sendNotice(SocketIOClient client, String json) {
 
+    }
+
+    private void sendSys(Chat chat, Room rooms){
+        server.getRoomOperations(chat.getRoom().getId().toString())
+                .sendEvent("info",
+                        MessageResponse.builder()
+                                .name(ChatType.SYSTEM.toString())
+                                .messageId(chat.getId().toString())
+                                .messageType(ChatType.SYSTEM)
+                                .roomId(chat.getRoom().getId().toString())
+                                .message(chat.getMessage())
+                                .isDeleted(chat.isDeleted())
+                                .createAt(LocalDateTime.now().toString())
+                                .build()
+                );
+        roomRepository.save(rooms.chatCountAdd());
     }
 
     private void logging(String message) {
