@@ -10,7 +10,7 @@ public class MessageResponse {
     private String roomId;
     private String name;
     private String message;
-    private ChatType chatType;
+    private ChatType messageType;
     private String createAt;
     private boolean isDeleted;
     private boolean isMine;
