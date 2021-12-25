@@ -154,7 +154,7 @@ public class SocketServiceImpl implements SocketService{
             RoomType chatType;
 
             if(room != null){
-                if(memberRepository.findByIdAndUserContaining(room.getId(), joinUserRoomRequest.getUsedPk()).isEmpty()){
+                if(memberRepository.findByIdAndUserContaining(room.getId(), joinUserRoomRequest.getUserPk()).isEmpty()){
                     errorAndDisconnected(client, "Member Not Exists", 404);
                 }
                 if(roomRepository.existsByIdAndMembersContaining(room.getId(), member)){
@@ -178,7 +178,7 @@ public class SocketServiceImpl implements SocketService{
                                 .build().memberAdd(member)
                 );
             }
-
+            client.joinRoom();
         }
 
 
