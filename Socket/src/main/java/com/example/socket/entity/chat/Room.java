@@ -97,7 +97,7 @@ public class Room {
         this.chats.stream().map(chat -> chat.chattingRoomSet());
     }
 
-    public Room chattingRoomDelete() {
+    public Room roomDelete() {
         memberSet();
         chatSet();
         this.chats.stream().map(chat->null);
