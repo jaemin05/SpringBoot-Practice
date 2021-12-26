@@ -23,6 +23,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.Locale;
 import java.util.UUID;
 
 @Service
@@ -234,10 +235,22 @@ public class SocketServiceImpl implements SocketService{
             roomRepository.deleteById(leaveChatRoomRequest.getRoomId());
         } else{
             if(room !=null) {
-                Chat chat = chatRepository
+                Chat chat = chatRepository.save(
+                        Chat.builder()
+                                .room(room)
+                                .message(member.getName() +  "님이 채팅방을 떠났습니다")
+                                .createAt(LocalDateTime.now())
+                                .chatType(ChatType.SYSTEM)
+                                .senderId(member.getId())
+                                .build()
+                );
+                roomRepository.save(room.memberDelete(member));
+                client.leaveRoom(leaveChatRoomRequest.getRoomId().toString());
+                sendSys(chat, room);
+            }else {
+                errorAndDisconnected(client, "Room Not Found", 404);
             }
         }
-
     }
 
     @Override
