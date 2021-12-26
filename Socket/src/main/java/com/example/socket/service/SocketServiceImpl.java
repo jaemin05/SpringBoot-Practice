@@ -9,6 +9,7 @@ import com.example.socket.error.ErrorResponse;
 import com.example.socket.exception.MemberNotFoundException;
 import com.example.socket.payload.request.JoinChatRoomRequest;
 import com.example.socket.payload.request.JoinUserRoomRequest;
+import com.example.socket.payload.request.LeaveChatRoomRequest;
 import com.example.socket.payload.request.MessageRequest;
 import com.example.socket.payload.response.MessageResponse;
 import com.example.socket.repository.ChatRepository;
@@ -125,8 +126,8 @@ public class SocketServiceImpl implements SocketService{
         }
     }
 
-    @Transactional
     @Override
+    @Transactional
     public void joinUserRoom(SocketIOClient client, String json) {
         String memberId = client.get("member");
         Member member = memberRepository.findById(memberId).orElse(null);
@@ -178,14 +179,64 @@ public class SocketServiceImpl implements SocketService{
                                 .build().memberAdd(member)
                 );
             }
-            client.joinRoom();
+            client.joinRoom(String.valueOf(room.getId()));
+            logging(member.getName() + "님이 " + room.getName() + "에 참여하셨습니다");
+
+            Chat chat = chatRepository.save(
+                    Chat.builder()
+                            .room(room)
+                            .message(member.getName() + "님이 참여하였습니다")
+                            .chatType(ChatType.SYSTEM)
+                            .createAt(LocalDateTime.now())
+                            .senderId(member.getId())
+                            .build()
+            );
+            sendSys(chat, room);
         }
-
-
+        else{
+            errorAndDisconnected(client, "Bad Request" ,404);
+        }
     }
 
     @Override
+    @Transactional
     public void leaveRoom(SocketIOClient client, String json) {
+        String memberId = client.get("member");
+        Member member = memberRepository.findById(memberId).orElse(null);
+
+        LeaveChatRoomRequest leaveChatRoomRequest = null;
+
+        try{
+            leaveChatRoomRequest = objectMapper.readValue(json, LeaveChatRoomRequest.class);
+        }catch (Exception e){
+            errorAndDisconnected(client, "Bad Request", 404);
+        }
+
+        if(!client.getAllRooms().contains(leaveChatRoomRequest.getRoomId())){
+            errorAndDisconnected(client, "Room Not Exists", 400);
+            return;
+        }
+
+        Room room = roomRepository.findById(leaveChatRoomRequest.getRoomId()).orElse(null);
+
+        if(roomRepository.existsByIdAndAdmin(leaveChatRoomRequest.getRoomId(), member.getId())){
+            sendSys(chatRepository.save(
+                    Chat.builder()
+                            .room(room)
+                            .message("관리자" + member.getName() + "님이 채팅방에서 나가셨습니다. 잠시 뒤 이 채팅방은 사라집니다")
+                            .createAt(LocalDateTime.now())
+                            .chatType(ChatType.SYSTEM)
+                            .senderId(member.getId())
+                            .build()
+            ), room);
+            roomRepository.save(room.roomDelete());
+            deleteRoom(leaveChatRoomRequest.getRoomId());
+            roomRepository.deleteById(leaveChatRoomRequest.getRoomId());
+        } else{
+            if(room !=null) {
+                Chat chat = chatRepository
+            }
+        }
 
     }
 
@@ -202,6 +253,12 @@ public class SocketServiceImpl implements SocketService{
     @Override
     public void sendNotice(SocketIOClient client, String json) {
 
+    }
+
+    private void deleteRoom(String roomId){
+        for(SocketIOClient client : server.getRoomOperations(roomId).getClients()){
+            client.leaveRoom(roomId);
+        }
     }
 
     private void sendSys(Chat chat, Room rooms){
