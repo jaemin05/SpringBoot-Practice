@@ -22,6 +22,9 @@ public class EmailServiceImpl implements EmailService {
     @Value("${code.exp}")
     private Integer CODE_EXP;
 
+    @Value("${mail.email}")
+    private String myEmail;
+
     private final JavaMailSender javaMailSender;
     private final CertificationRepository certificationRepository;
 
@@ -30,7 +33,7 @@ public class EmailServiceImpl implements EmailService {
 
         try {
             String code = getCode(createKey());
-            message.setFrom("lovesjm2005@gmail.com");
+            message.setFrom(myEmail);
             message.addRecipients(Message.RecipientType.TO, email);
             message.setSubject("[이메일 인증]");
             message.setText(code);
