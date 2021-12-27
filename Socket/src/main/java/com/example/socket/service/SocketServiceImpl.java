@@ -23,7 +23,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.Locale;
 import java.util.UUID;
 
 @Service
@@ -255,17 +254,75 @@ public class SocketServiceImpl implements SocketService{
 
     @Override
     public void sendMessage(SocketIOClient client, String json) {
+        String memberId = client.get("member");
+        Member member = memberRepository.findById(memberId).orElse(null);
 
+        MessageRequest messageRequest;
+
+        try{
+            messageRequest = objectMapper.readValue(json, MessageRequest.class);
+        } catch (Exception e){
+            errorAndDisconnected(client, "Bad Request", 404);
+            return;
+        }
+
+        if(messageRequest != null){
+            if(member == null){
+                errorAndDisconnected(client, "Member Not Found", 404);
+                return;
+            }
+
+            if(!roomRepository.existsByIdAndMembersContaining(messageRequest.getRoomId(), member)){
+                errorAndDisconnected(client, "Room Not Found", 404);
+                return;
+            }
+
+            Room room = roomRepository.findById(messageRequest.getRoomId()).orElse(null);
+
+            if(room != null){
+                Chat chat = chatRepository.save(
+                        Chat.builder()
+                                .senderId(member.getId())
+                                .chatType(ChatType.USER)
+                                .room(room)
+                                .message(messageRequest.getMessage())
+                                .createAt(LocalDateTime.now())
+                                .isDeleted(false)
+                                .build()
+                );
+
+                send(member, chat, room);
+            }else {
+                errorAndDisconnected(client, "Bad Request", 400);
+            }
+        }else {
+            errorAndDisconnected(client, "Bad Request", 400);
+        }
     }
 
     @Override
     public void changeTitle(SocketIOClient client, String json) {
-
+        
     }
 
     @Override
     public void sendNotice(SocketIOClient client, String json) {
 
+    }
+
+    private void send(Member member, Chat chat, Room room){
+        server.getRoomOperations(room.getId().toString()).sendEvent("message",
+                MessageResponse.builder()
+                        .messageId(chat.getId().toString())
+                        .name(member.getName())
+                        .message(chat.getMessage())
+                        .createAt(LocalDateTime.now().toString())
+                        .roomId(chat.getRoom().getId().toString())
+                        .messageType(chat.getChatType())
+                        .isMine(member.equals(chat.getSenderId()))
+                        .isDeleted(false)
+                        .build());
+        roomRepository.save(room.chatCountAdd());
     }
 
     private void deleteRoom(String roomId){
