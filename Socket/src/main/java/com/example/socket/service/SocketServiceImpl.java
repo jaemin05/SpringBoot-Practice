@@ -7,10 +7,7 @@ import com.example.socket.entity.Role;
 import com.example.socket.entity.chat.*;
 import com.example.socket.error.ErrorResponse;
 import com.example.socket.exception.MemberNotFoundException;
-import com.example.socket.payload.request.JoinChatRoomRequest;
-import com.example.socket.payload.request.JoinUserRoomRequest;
-import com.example.socket.payload.request.LeaveChatRoomRequest;
-import com.example.socket.payload.request.MessageRequest;
+import com.example.socket.payload.request.*;
 import com.example.socket.payload.response.MessageResponse;
 import com.example.socket.repository.ChatRepository;
 import com.example.socket.repository.MemberRepository;
@@ -253,6 +250,7 @@ public class SocketServiceImpl implements SocketService{
     }
 
     @Override
+    @Transactional
     public void sendMessage(SocketIOClient client, String json) {
         String memberId = client.get("member");
         Member member = memberRepository.findById(memberId).orElse(null);
@@ -301,8 +299,18 @@ public class SocketServiceImpl implements SocketService{
     }
 
     @Override
+    @Transactional
     public void changeTitle(SocketIOClient client, String json) {
-        
+        ChangeTitleRequest changeTitleRequest = null;
+        String memberId = client.get("member");
+
+        try{
+            changeTitleRequest = objectMapper.readValue(json, ChangeTitleRequest.class);
+        } catch (Exception e){
+            errorAndDisconnected(client,"Bad Request", 404);
+        }
+
+        Room room = roomRepository.findByIdAndAdmin(changeTitleRequest.getRoomId(),memberId).orElse(null);
     }
 
     @Override
