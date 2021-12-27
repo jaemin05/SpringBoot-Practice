@@ -37,3 +37,6 @@ spring:
 
 code:
   exp: ${EXP}
+
+mail:
+    email: ${MY_EMAIL}
