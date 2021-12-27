@@ -32,6 +32,7 @@ public class EmailServiceImpl implements EmailService {
         MimeMessage message = javaMailSender.createMimeMessage();
 
         try {
+            
             String code = getCode(createKey());
             message.setFrom(myEmail);
             message.addRecipients(Message.RecipientType.TO, email);
