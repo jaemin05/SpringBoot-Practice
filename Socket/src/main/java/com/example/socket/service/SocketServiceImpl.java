@@ -346,7 +346,26 @@ public class SocketServiceImpl implements SocketService{
         }
 
         Optional<Member> member = memberRepository.findById(memberId);
-        
+        if(member.isEmpty()){
+            errorAndDisconnected(client,"Member Not Found", 404);
+            return;
+        }
+
+        Room room = roomRepository.findByIdAndAdmin(messageRequest.getRoomId(), memberId).orElse(null);
+
+        if(room != null){
+            sendSys(chatRepository.save(
+                    Chat.builder()
+                            .senderId(member.get().getId())
+                            .chatType(ChatType.NOTICE)
+                            .room(room)
+                            .isDeleted(false)
+                            .message(messageRequest.getMessage())
+                            .build()
+            ),room);
+        }else{
+            errorAndDisconnected(client, "Bad Request", 404);
+        }
     }
 
     private void send(Member member, Chat chat, Room room){
