@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -311,11 +312,41 @@ public class SocketServiceImpl implements SocketService{
         }
 
         Room room = roomRepository.findByIdAndAdmin(changeTitleRequest.getRoomId(),memberId).orElse(null);
+
+        if(room !=null){
+            roomRepository.save(room.changeRoomName(changeTitleRequest.getTitle()));
+
+            sendSys(chatRepository.save(
+                    Chat.builder()
+                            .senderId(memberRepository.findById(memberId)
+                                    .orElseThrow(()->MemberNotFoundException.Exception).getId())
+                            .chatType(ChatType.SYSTEM)
+                            .room(room)
+                            .message("채팅방의 이름이 " + changeTitleRequest.getTitle() + "로 바뀌었습니다")
+                            .createAt(LocalDateTime.now())
+                            .isDeleted(false)
+                            .build()
+            ), room);
+        }else {
+            errorAndDisconnected(client, "Only Admin can change RoomTitle", 404);
+        }
     }
 
     @Override
+    @Transactional
     public void sendNotice(SocketIOClient client, String json) {
+        MessageRequest messageRequest = null;
+        String memberId = client.get("member");
 
+        try{
+            messageRequest = objectMapper.readValue(json, MessageRequest.class);
+        }catch (Exception e){
+            errorAndDisconnected(client, "Bad Request", 404);
+            return;
+        }
+
+        Optional<Member> member = memberRepository.findById(memberId);
+        
     }
 
     private void send(Member member, Chat chat, Room room){
