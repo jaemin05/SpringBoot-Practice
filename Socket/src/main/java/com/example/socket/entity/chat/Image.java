@@ -11,7 +11,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Entity(name = "image")
+@Entity
 public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
