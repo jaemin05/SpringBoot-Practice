@@ -24,7 +24,7 @@ import java.util.Date;
 public class TokenProvider {
     private final CustomUserDetailsService customUserDetailsService;
 
-    @Value("${app.auth.accessTokenExpired")
+    @Value("${app.auth.accessTokenExpired}")
     private long ACCESS_TOKEN_EXPIRED;
 
     @Value("${app.auth.refreshTokenExpired}")
