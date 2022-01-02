@@ -1,4 +1,4 @@
-package com.example.oauth.api.payload;
+package com.example.oauth.api.payload.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,6 +10,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AuthRequest {
-    private String id;
+    private String username;
     private String password;
 }
