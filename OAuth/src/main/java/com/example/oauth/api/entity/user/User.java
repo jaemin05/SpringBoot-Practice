@@ -2,9 +2,7 @@ package com.example.oauth.api.entity.user;
 
 import com.example.oauth.oauth.entity.ProviderType;
 import com.example.oauth.oauth.entity.RoleType;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import org.apache.tomcat.jni.Local;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
