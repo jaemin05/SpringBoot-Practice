@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 @Entity
 public class User {
     @Id
+    @Column(name = "USER_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -82,8 +83,6 @@ public class User {
         this.imageUrl = imageUrl;
         this.role = role;
         this.emailVerified = emailVerified;
-        this.password = password;
-        this.authProvider = authProvider;
         this.password = password;
         this.authProvider = authProvider;
         this.providerId = providerId;
