@@ -1,11 +1,14 @@
 package com.example.oauth.security.OAuth;
 
+import com.example.oauth.config.AppProperties;
 import com.example.oauth.domain.User.AuthProvider;
+import com.example.oauth.domain.User.Role;
 import com.example.oauth.domain.User.User;
 import com.example.oauth.domain.User.UserRepository;
 import com.example.oauth.exception.UserNotFound;
 import com.example.oauth.security.OAuth.user.OAuthUserInfo;
 import com.example.oauth.security.OAuth.user.OAuthUserInfoFactory;
+import com.example.oauth.security.UserPrincipal;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.AuthenticationException;
@@ -14,6 +17,8 @@ import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
@@ -41,21 +46,39 @@ public class CustomOAuthUserService extends DefaultOAuth2UserService {
                 .orElseThrow(()->UserNotFound.Exception);
 
         if(savedUser != null){
-            if(providerType != savedUser.getProviderId()){
+            if(providerType != savedUser.getAuthProvider()) {
                 throw new OAuth2AuthenticationException(
                         "Looks like you're signed up with " + providerType + "account. Please use your " + savedUser.getProviderId()
-                        + " account to login."
+                                + " account to login."
                 );
-                updateUser(savedUser, oAuth2UserInfo);
             }
-        }
+            updateUser(savedUser, oAuth2UserInfo);
+        } else{
+                savedUser = createUser(request, oAuth2UserInfo);
+            }
+        return UserPrincipal.create(savedUser, user.getAttributes());
     }
 
-    private User createUser(OAuthUserInfo userInfo, AuthProvider providerType) {
-        User user = new User(
-                userInfo.getId(),
-                userInfo.getName(),
-                userInfo.getEmail()
-        )
+    private User createUser(OAuth2UserRequest request, OAuthUserInfo userInfo) {
+        LocalDateTime now = LocalDateTime.now();
+        return userRepository.save(User.builder()
+                .name(userInfo.getName())
+                .email(userInfo.getEmail())
+                .imageUrl(userInfo.getImageUrl())
+                .authProvider(AuthProvider.valueOf(request.getClientRegistration().getRegistrationId()))
+                .providerId(userInfo.getId())
+                .createAt(now)
+                .modifiedAt(now)
+                .build()
+        );
     }
+    private User updateUser(User user, OAuthUserInfo userInfo){
+        return userRepository.save(user
+                .update(
+                        userInfo.getName(),
+                        userInfo.getImageUrl()
+                )
+        );
+    }
+
 }
