@@ -1,0 +1,61 @@
+package com.example.oauth.security.OAuth;
+
+import com.example.oauth.domain.User.AuthProvider;
+import com.example.oauth.domain.User.User;
+import com.example.oauth.domain.User.UserRepository;
+import com.example.oauth.exception.UserNotFound;
+import com.example.oauth.security.OAuth.user.OAuthUserInfo;
+import com.example.oauth.security.OAuth.user.OAuthUserInfoFactory;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.InternalAuthenticationServiceException;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
+import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
+import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+public class CustomOAuthUserService extends DefaultOAuth2UserService {
+    private final UserRepository userRepository;
+
+    @Override
+    public OAuth2User loadUser(OAuth2UserRequest request) throws OAuth2AuthenticationException {
+        OAuth2User oAuth2User = super.loadUser(request);
+
+        try{
+            return processOAuth2User(request, oAuth2User);
+        } catch (AuthenticationException e){
+            throw e;
+        } catch (Exception e){
+            throw new InternalAuthenticationServiceException(e.getMessage(), e.getCause());
+        }
+    }
+
+    private OAuth2User processOAuth2User(OAuth2UserRequest request, OAuth2User user) {
+        AuthProvider providerType = AuthProvider.valueOf(request.getClientRegistration().getRegistrationId().toUpperCase());
+
+        OAuthUserInfo oAuth2UserInfo = OAuthUserInfoFactory.getOAuthUserInfo(providerType, user.getAttributes());
+        User savedUser = userRepository.findByEmail(oAuth2UserInfo.getEmail())
+                .orElseThrow(()->UserNotFound.Exception);
+
+        if(savedUser != null){
+            if(providerType != savedUser.getProviderId()){
+                throw new OAuth2AuthenticationException(
+                        "Looks like you're signed up with " + providerType + "account. Please use your " + savedUser.getProviderId()
+                        + " account to login."
+                );
+                updateUser(savedUser, oAuth2UserInfo);
+            }
+        }
+    }
+
+    private User createUser(OAuthUserInfo userInfo, AuthProvider providerType) {
+        User user = new User(
+                userInfo.getId(),
+                userInfo.getName(),
+                userInfo.getEmail()
+        )
+    }
+}
