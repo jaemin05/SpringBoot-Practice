@@ -1,6 +1,6 @@
 package com.example.oauth.security.OAuth.user;
 
-import com.example.oauth.domain.User.AuthProvider;
+import com.example.oauth.domain.user.AuthProvider;
 import com.example.oauth.exception.ProviderTypeInvalidException;
 import com.example.oauth.security.OAuth.user.impl.FaceBookOAuthUserInfo;
 import com.example.oauth.security.OAuth.user.impl.GoogleOAuthUserInfo;
