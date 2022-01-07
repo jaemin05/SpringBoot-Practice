@@ -1,13 +1,11 @@
-package com.example.oauth.security.OAuth;
+package com.example.oauth.service;
 
-import com.example.oauth.config.AppProperties;
-import com.example.oauth.domain.User.AuthProvider;
-import com.example.oauth.domain.User.Role;
-import com.example.oauth.domain.User.User;
-import com.example.oauth.domain.User.UserRepository;
+import com.example.oauth.domain.user.AuthProvider;
+import com.example.oauth.domain.user.User;
+import com.example.oauth.domain.user.UserRepository;
 import com.example.oauth.exception.UserNotFound;
-import com.example.oauth.security.OAuth.user.OAuthUserInfo;
-import com.example.oauth.security.OAuth.user.OAuthUserInfoFactory;
+import com.example.oauth.security.oauth.user.OAuthUserInfo;
+import com.example.oauth.security.oauth.user.OAuthUserInfoFactory;
 import com.example.oauth.security.UserPrincipal;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
