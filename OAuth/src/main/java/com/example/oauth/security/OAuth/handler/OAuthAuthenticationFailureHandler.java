@@ -3,11 +3,11 @@ package com.example.oauth.security.oauth.handler;
 import com.example.oauth.security.repository.HttpCookieOAuthAuthorizationRequestRepository;
 import com.example.oauth.utils.CookieUtils;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import javax.naming.AuthenticationException;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +19,7 @@ import static com.example.oauth.security.repository.HttpCookieOAuthAuthorization
 
 @Component
 @RequiredArgsConstructor
-public class OAuthAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
+public class OAuthAuthenticationFailureHandler  extends SimpleUrlAuthenticationFailureHandler {
     private final HttpCookieOAuthAuthorizationRequestRepository httpCookieOAuthAuthorizationRequestRepository;
 
     @Override
@@ -40,5 +40,4 @@ public class OAuthAuthenticationFailureHandler extends SimpleUrlAuthenticationFa
 
         getRedirectStrategy().sendRedirect(request, response, targetUrl);
     }
-
 }
