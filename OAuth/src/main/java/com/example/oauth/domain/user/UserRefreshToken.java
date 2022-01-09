@@ -35,4 +35,9 @@ public class UserRefreshToken {
         this. refreshToken = refreshToken;
     }
 
+    public UserRefreshToken updateValue(String refreshToken){
+        this.refreshToken = refreshToken;
+        return this;
+    }
+
 }
