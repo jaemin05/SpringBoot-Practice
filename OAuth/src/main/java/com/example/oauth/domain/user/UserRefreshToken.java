@@ -12,7 +12,6 @@ import javax.validation.constraints.Size;
 @Getter
 @Setter
 @NoArgsConstructor
-@Builder
 @Entity
 public class UserRefreshToken {
     @Id
@@ -30,6 +29,7 @@ public class UserRefreshToken {
     @Size(max = 512)
     private String refreshToken;
 
+    @Builder
     public UserRefreshToken(String userId, String refreshToken) {
         this.userId = userId;
         this. refreshToken = refreshToken;
