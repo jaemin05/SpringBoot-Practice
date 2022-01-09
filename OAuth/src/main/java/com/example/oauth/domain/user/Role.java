@@ -3,6 +3,8 @@ package com.example.oauth.domain.user;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+import java.util.Arrays;
+
 @Getter
 @RequiredArgsConstructor
 public enum Role {
@@ -12,4 +14,11 @@ public enum Role {
 
     private final String key;
     private final String value;
+
+    public static Role of(String code){
+        return Arrays.stream(Role.values())
+                .filter(role -> role.getKey().equals(code))
+                .findAny()
+                .orElse(GUEST);
+    }
 }
