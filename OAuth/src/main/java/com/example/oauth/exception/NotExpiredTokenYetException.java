@@ -1,5 +1,6 @@
 package com.example.oauth.exception;
 
+import com.example.oauth.error.ErrorCode;
 import com.example.oauth.error.Exception.BusinessException;
 
 public class NotExpiredTokenYetException extends BusinessException {
@@ -7,6 +8,6 @@ public class NotExpiredTokenYetException extends BusinessException {
             new NotExpiredTokenYetException();
 
     private NotExpiredTokenYetException(){
-        super();
+        super(ErrorCode.NOT_EXPIRED_TOKEN_YET);
     }
 }
