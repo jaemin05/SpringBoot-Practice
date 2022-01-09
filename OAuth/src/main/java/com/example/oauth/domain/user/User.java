@@ -11,7 +11,6 @@ import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
-@Builder
 @Entity
 public class User {
     @Id
@@ -66,6 +65,7 @@ public class User {
     @NotNull
     private LocalDateTime modifiedAt;
 
+    @Builder
     public User(
             String name,
             String email,
