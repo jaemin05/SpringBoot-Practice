@@ -3,7 +3,7 @@ package com.example.oauth.service;
 import com.example.oauth.domain.user.AuthProvider;
 import com.example.oauth.domain.user.User;
 import com.example.oauth.domain.user.UserRepository;
-import com.example.oauth.exception.UserNotFound;
+import com.example.oauth.exception.UserNotFoundException;
 import com.example.oauth.security.oauth.user.OAuthUserInfo;
 import com.example.oauth.security.oauth.user.OAuthUserInfoFactory;
 import com.example.oauth.security.UserPrincipal;
@@ -41,7 +41,7 @@ public class CustomOAuthUserService extends DefaultOAuth2UserService {
 
         OAuthUserInfo oAuth2UserInfo = OAuthUserInfoFactory.getOAuthUserInfo(providerType, user.getAttributes());
         User savedUser = userRepository.findByEmail(oAuth2UserInfo.getEmail())
-                .orElseThrow(()->UserNotFound.Exception);
+                .orElseThrow(()-> UserNotFoundException.Exception);
 
         if(savedUser != null){
             if(providerType != savedUser.getAuthProvider()) {
