@@ -20,8 +20,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.net.URI;
 import java.util.Date;
 
