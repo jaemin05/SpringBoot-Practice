@@ -1,41 +1,43 @@
 package com.example.oauth.security;
 
+import com.example.oauth.domain.user.AuthProvider;
+import com.example.oauth.domain.user.Role;
 import com.example.oauth.domain.user.User;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.oidc.OidcIdToken;
+import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
-import java.util.List;
 
 @Getter
-public class UserPrincipal implements OAuth2User, UserDetails {
-    private Long id;
-    private String email;
-    private String password;
-    private Collection<? extends GrantedAuthority> authorities;
+@AllArgsConstructor
+@RequiredArgsConstructor
+public class UserPrincipal implements OAuth2User, UserDetails, OidcUser {
+    private final Long id;
+    private final String email;
+    private final String password;
+    private final Role role;
+    private final AuthProvider provider;
+    private final Collection<? extends GrantedAuthority> authorities;
     private Map<String, Object> attributes;
 
-    public UserPrincipal(Long id, String email, String password, Collection<? extends GrantedAuthority> authorities){
-        this.id = id;
-        this.email = email;
-        this.password = password;
-        this.authorities = authorities;
-    }
-
     public static UserPrincipal create(User user){
-        List<GrantedAuthority> authorities = Collections
-                .singletonList(new SimpleGrantedAuthority("ROLE_USER"));
-
         return new UserPrincipal(
                 user.getId(),
                 user.getEmail(),
                 user.getPassword(),
-                authorities
+                Role.USER,
+                user.getAuthProvider(),
+                Collections.singletonList(new SimpleGrantedAuthority(Role.USER.getKey()))
         );
     }
 
@@ -93,5 +95,20 @@ public class UserPrincipal implements OAuth2User, UserDetails {
     @Override
     public String getName() {
         return String.valueOf(id);
+    }
+
+    @Override
+    public Map<String, Object> getClaims() {
+        return null;
+    }
+
+    @Override
+    public OidcUserInfo getUserInfo() {
+        return null;
+    }
+
+    @Override
+    public OidcIdToken getIdToken() {
+        return null;
     }
 }
