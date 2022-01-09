@@ -1,5 +1,6 @@
 package com.example.oauth.exception;
 
+import com.example.oauth.error.ErrorCode;
 import com.example.oauth.error.Exception.BusinessException;
 
 public class EmailAlreadyExistsException extends BusinessException {
@@ -7,6 +8,6 @@ public class EmailAlreadyExistsException extends BusinessException {
             new EmailAlreadyExistsException();
 
     private EmailAlreadyExistsException(){
-        super();
+        super(ErrorCode.EMAIL_ALREADY_EXISTS);
     }
 }
