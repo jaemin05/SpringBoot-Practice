@@ -1,6 +1,7 @@
 spring:
   main:
     allow-bean-definition-overriding: true
+    web-application-type: none
   profiles.active: local
   # 데이터 소스 설정
   datasource:
@@ -84,22 +85,9 @@ spring:
           userInfoUri: https://kapi.kakao.com/v2/user/me
           userNameAttribute: id
 
-# cors 설정
-cors:
-  allowed-origins: 'http://localhost:3000'
-  allowed-methods: GET,POST,PUT,DELETE,OPTIONS
-  allowed-headers: '*'
-  max-age: 3600
-
-jwt.secret: ${Jwt_Secret}
 # 토큰 관련 secret Key 및 RedirectUri 설정
-app:
-  auth:
-    tokenSecret: ${Secret_Token}
-    tokenExpiry: 1800000
-    refreshTokenExpiry: 604800000
-  oauth2:
-    authorizedRedirectUris:
-      - http://localhost:8080/oauth/redirect
-
+jwt:
+  secretToken: ${Secret_Token}
+  accessTokenExp: 1800000
+  refreshTokenExp: 604800000
 
