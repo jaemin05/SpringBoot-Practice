@@ -1,6 +1,6 @@
-package com.example.oauth.security.oauth.user.impl;
+package com.example.oauth.oauth2.impl;
 
-import com.example.oauth.security.oauth.user.OAuthUserInfo;
+import com.example.oauth.oauth2.OAuthUserInfo;
 
 import java.util.Map;
 

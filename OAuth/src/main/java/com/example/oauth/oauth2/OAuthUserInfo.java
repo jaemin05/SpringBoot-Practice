@@ -1,4 +1,4 @@
-package com.example.oauth.security.oauth.user;
+package com.example.oauth.oauth2;
 
 import java.util.Map;
 

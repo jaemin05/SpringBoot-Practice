@@ -1,4 +1,4 @@
-package com.example.oauth.domain.user;
+package com.example.oauth.domain.refreshToken;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -4,8 +4,8 @@ import com.example.oauth.domain.user.AuthProvider;
 import com.example.oauth.domain.user.User;
 import com.example.oauth.domain.user.UserRepository;
 import com.example.oauth.exception.UserNotFoundException;
-import com.example.oauth.security.oauth.user.OAuthUserInfo;
-import com.example.oauth.security.oauth.user.OAuthUserInfoFactory;
+import com.example.oauth.oauth2.OAuthUserInfo;
+import com.example.oauth.oauth2.OAuthUserInfoFactory;
 import com.example.oauth.security.UserPrincipal;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
-public class CustomOAuthUserService extends DefaultOAuth2UserService {
+public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     private final UserRepository userRepository;
 
     @Override
