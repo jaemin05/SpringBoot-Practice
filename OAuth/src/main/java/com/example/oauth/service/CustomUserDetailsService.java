@@ -2,6 +2,7 @@ package com.example.oauth.service;
 
 import com.example.oauth.domain.user.User;
 import com.example.oauth.domain.user.UserRepository;
+import com.example.oauth.exception.UserNotFoundException;
 import com.example.oauth.security.UserPrincipal;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,9 +18,9 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(username).get();
+        User user = userRepository.findByEmail(username).orElseThrow(() -> UserNotFoundException.Exception);
         if(user == null){
-            throw new UsernameNotFoundException(username + " -> 데이터베이스에서 찾을 수 없습니다.");
+            throw UserNotFoundException.Exception;
         }
         return UserPrincipal.create(user);
     }
