@@ -1,4 +1,4 @@
-package com.example.oauth.domain.user;
+package com.example.oauth.domain.refreshToken;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -10,7 +10,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Getter
-@Setter
 @NoArgsConstructor
 @Entity
 public class UserRefreshToken {
@@ -29,15 +28,20 @@ public class UserRefreshToken {
     @Size(max = 512)
     private String refreshToken;
 
+    @Column(name = "REFRESH_EXP")
+    private Long refreshExpiration;
+
     @Builder
-    public UserRefreshToken(String userId, String refreshToken) {
+    public UserRefreshToken(String userId, String refreshToken, Long refreshExpiration) {
         this.userId = userId;
         this. refreshToken = refreshToken;
+        this.refreshExpiration = refreshExpiration;
     }
 
-    public UserRefreshToken updateValue(String refreshToken){
+    public String reissue(String refreshToken, Long refreshExpiration){
         this.refreshToken = refreshToken;
-        return this;
+        this.refreshExpiration = refreshExpiration;
+        return this.refreshToken;
     }
 
 }
