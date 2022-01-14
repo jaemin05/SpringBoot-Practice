@@ -14,11 +14,4 @@ public enum Role {
 
     private final String key;
     private final String value;
-
-    public static Role of(String code){
-        return Arrays.stream(Role.values())
-                .filter(role -> role.getKey().equals(code))
-                .findAny()
-                .orElse(GUEST);
-    }
 }
