@@ -7,16 +7,13 @@ import com.example.oauth.dto.response.TokenResponse;
 import com.example.oauth.exception.ExpiredTokenException;
 import com.example.oauth.exception.InvalidTokenException;
 import com.example.oauth.exception.TokenValidFailedException;
-import com.nimbusds.oauth2.sdk.token.RefreshToken;
 import io.jsonwebtoken.*;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
@@ -32,27 +29,12 @@ public class TokenProvider {
     private final JwtProperties jwtProperties;
     private final UserRefreshTokenRepository refreshTokenRepository;
 
-    public TokenResponse generateToken(String id, String role){
-        String access = generateAccessToken(id , role);
-        String refresh = generateRefreshToken(id, role);
-
-        refreshTokenRepository.save(
-                UserRefreshToken.builder()
-                        .userId(id)
-                        .refreshToken(refresh)
-                        .refreshExpiration(jwtProperties.getRefreshTokenExp())
-                        .build()
-        );
-
-        return new TokenResponse(access, refresh);
-    }
-
     public String generateAccessToken(String id, String role){
         return Jwts.builder()
                 .setSubject(id)
                 .claim("type", "access")
                 .claim("role", role)
-                .signWith(SignatureAlgorithm.ES256, jwtProperties.getSecretKey())
+                .signWith(SignatureAlgorithm.ES256, jwtProperties.getSecretToken())
                 .setExpiration(
                         new Date(System.currentTimeMillis() + jwtProperties.getAccessTokenExp() * 1000)
                 )
@@ -65,7 +47,7 @@ public class TokenProvider {
                 .setSubject(id)
                 .claim("type", "refresh")
                 .claim("role", role)
-                .signWith(SignatureAlgorithm.HS256, jwtProperties.getSecretKey())
+                .signWith(SignatureAlgorithm.HS256, jwtProperties.getSecretToken())
                 .setExpiration(
                         new Date(System.currentTimeMillis() + jwtProperties.getRefreshTokenExp() * 1000)
                 )
@@ -93,10 +75,14 @@ public class TokenProvider {
         return this.getBody(token) != null;
     }
 
+    public boolean isRefreshToken(String refreshToken){
+        return getBody(refreshToken).get("type").equals("refresh");
+    }
+
     private Claims getBody(String token) {
         try {
             return Jwts.parserBuilder()
-                    .setSigningKey(jwtProperties.getSecretKey())
+                    .setSigningKey(jwtProperties.getSecretToken())
                     .build()
                     .parseClaimsJws(token)
                     .getBody();
@@ -105,6 +91,10 @@ public class TokenProvider {
         } catch (JwtException e) {
             throw InvalidTokenException.Exception;
         }
+    }
+
+    public boolean checkRole(String token, String role){
+        return getBody(token).get("role").equals(role);
     }
 
     public String resolveToken(HttpServletRequest request){
