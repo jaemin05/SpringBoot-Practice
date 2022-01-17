@@ -6,7 +6,6 @@ import com.example.oauth.domain.refreshToken.UserRefreshTokenRepository;
 import com.example.oauth.domain.user.*;
 import com.example.oauth.dto.Request.LoginRequest;
 import com.example.oauth.dto.Request.SignUpRequest;
-import com.example.oauth.dto.Request.TokenRequest;
 import com.example.oauth.dto.response.TokenResponse;
 import com.example.oauth.exception.*;
 import com.example.oauth.security.token.TokenProvider;
@@ -51,7 +50,7 @@ public class GeneralUserService {
     }
 
     @Transactional
-    public TokenRequest login(LoginRequest loginRequest){
+    public TokenResponse login(LoginRequest loginRequest){
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                     loginRequest.getEmail(),
@@ -80,7 +79,7 @@ public class GeneralUserService {
         } else {
             userRefreshToken.reissue(refreshToken, jwtProperties.getAuth().getRefreshTokenExp());
         }
-        return new TokenRequest(accessToken, refreshToken);
+        return new TokenResponse(accessToken, refreshToken);
     };
 
     @Transactional

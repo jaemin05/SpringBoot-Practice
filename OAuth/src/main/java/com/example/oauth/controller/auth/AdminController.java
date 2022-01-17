@@ -2,7 +2,6 @@ package com.example.oauth.controller.auth;
 
 import com.example.oauth.dto.Request.LoginRequest;
 import com.example.oauth.dto.Request.SignUpRequest;
-import com.example.oauth.dto.Request.TokenRequest;
 import com.example.oauth.dto.response.TokenResponse;
 import com.example.oauth.service.auth.AdminService;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +22,7 @@ public class AdminController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<TokenRequest> login(@RequestBody @Valid LoginRequest loginRequest){
+    public ResponseEntity<TokenResponse> login(@RequestBody @Valid LoginRequest loginRequest){
         return ResponseEntity.ok(adminService.login(loginRequest));
     }
 
