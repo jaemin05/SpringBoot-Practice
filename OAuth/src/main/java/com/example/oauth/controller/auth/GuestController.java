@@ -4,7 +4,7 @@ import com.example.oauth.dto.Request.LoginRequest;
 import com.example.oauth.dto.Request.SignUpRequest;
 import com.example.oauth.dto.Request.TokenRequest;
 import com.example.oauth.dto.response.TokenResponse;
-import com.example.oauth.service.GuestService;
+import com.example.oauth.service.auth.GuestService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +18,7 @@ public class GuestController {
     private final GuestService guestService;
 
     @PostMapping("/signup")
-    public ResponseEntity<?> signup(@RequestBody @Valid SignUpRequest signUpRequest){
+    public ResponseEntity<String> signup(@RequestBody @Valid SignUpRequest signUpRequest){
         return ResponseEntity.ok(guestService.signup(signUpRequest));
     }
 

@@ -4,7 +4,7 @@ import com.example.oauth.dto.Request.LoginRequest;
 import com.example.oauth.dto.Request.SignUpRequest;
 import com.example.oauth.dto.Request.TokenRequest;
 import com.example.oauth.dto.response.TokenResponse;
-import com.example.oauth.service.auth.AdminService;
+import com.example.oauth.service.auth.GeneralUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,22 +13,22 @@ import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/admin")
-public class AdminController {
-    private final AdminService adminService;
+@RequestMapping("/general")
+public class GeneralUserController {
+    private final GeneralUserService userService;
 
     @PostMapping("/signup")
     public ResponseEntity<String> signup(@RequestBody @Valid SignUpRequest signUpRequest){
-        return ResponseEntity.ok(adminService.signup(signUpRequest));
+        return ResponseEntity.ok(userService.signup(signUpRequest));
     }
 
     @PostMapping("/login")
     public ResponseEntity<TokenRequest> login(@RequestBody @Valid LoginRequest loginRequest){
-        return ResponseEntity.ok(adminService.login(loginRequest));
+        return ResponseEntity.ok(userService.login(loginRequest));
     }
 
     @PostMapping("/reissue")
     public TokenResponse reissue(@RequestHeader("X-Refresh-Token") String refresh){
-        return adminService.reissue(refresh);
+        return userService.reissue(refresh);
     }
 }
