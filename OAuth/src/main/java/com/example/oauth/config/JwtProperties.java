@@ -12,13 +12,15 @@ import java.util.Base64;
 @ConstructorBinding
 @ConfigurationProperties(prefix = "jwt")
 public class JwtProperties {
-    private final String secretToken;
-    private final long accessTokenExp;
-    private final long refreshTokenExp;
+    private final Auth auth = new Auth();
 
-    public JwtProperties(String secretToken, long accessTokenExp, long refreshTokenExp){
-        this.secretToken = Base64.getEncoder().encodeToString(secretToken.getBytes(StandardCharsets.UTF_8));
-        this.accessTokenExp = accessTokenExp;
-        this.refreshTokenExp = refreshTokenExp;
+    @Getter
+    public static class Auth {
+        private String secretToken;
+        private long accessTokenExp;
+        private long refreshTokenExp;
     }
+
+
+
 }
