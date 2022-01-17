@@ -4,10 +4,6 @@ import lombok.*;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.ConstructorBinding;
 
-
-import java.nio.charset.StandardCharsets;
-import java.util.Base64;
-
 @Getter
 @ConstructorBinding
 @ConfigurationProperties(prefix = "jwt")
