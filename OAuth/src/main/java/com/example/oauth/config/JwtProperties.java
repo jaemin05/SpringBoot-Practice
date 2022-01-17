@@ -20,7 +20,4 @@ public class JwtProperties {
         private long accessTokenExp;
         private long refreshTokenExp;
     }
-
-
-
 }
