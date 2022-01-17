@@ -34,9 +34,9 @@ public class TokenProvider {
                 .setSubject(id)
                 .claim("type", "access")
                 .claim("role", role)
-                .signWith(SignatureAlgorithm.ES256, jwtProperties.getSecretToken())
+                .signWith(SignatureAlgorithm.ES256, jwtProperties.getAuth().getSecretToken())
                 .setExpiration(
-                        new Date(System.currentTimeMillis() + jwtProperties.getAccessTokenExp() * 1000)
+                        new Date(System.currentTimeMillis() + jwtProperties.getAuth().getAccessTokenExp() * 1000)
                 )
                 .setIssuedAt(new Date())
                 .compact();
@@ -47,9 +47,9 @@ public class TokenProvider {
                 .setSubject(id)
                 .claim("type", "refresh")
                 .claim("role", role)
-                .signWith(SignatureAlgorithm.HS256, jwtProperties.getSecretToken())
+                .signWith(SignatureAlgorithm.HS256, jwtProperties.getAuth().getSecretToken())
                 .setExpiration(
-                        new Date(System.currentTimeMillis() + jwtProperties.getRefreshTokenExp() * 1000)
+                        new Date(System.currentTimeMillis() + jwtProperties.getAuth().getRefreshTokenExp() * 1000)
                 )
                 .setIssuedAt(new Date())
                 .compact();
@@ -82,7 +82,7 @@ public class TokenProvider {
     private Claims getBody(String token) {
         try {
             return Jwts.parserBuilder()
-                    .setSigningKey(jwtProperties.getSecretToken())
+                    .setSigningKey(jwtProperties.getAuth().getSecretToken())
                     .build()
                     .parseClaimsJws(token)
                     .getBody();

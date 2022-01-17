@@ -3,7 +3,6 @@ package com.example.oauth.domain.user;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-import java.util.Arrays;
 
 @Getter
 @RequiredArgsConstructor
