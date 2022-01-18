@@ -12,7 +12,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/guest")
+@RequestMapping("/api/v1/auth/guest")
 public class GuestController {
     private final GuestService guestService;
 

@@ -12,7 +12,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/admin")
+@RequestMapping("/api/v1/auth/admin")
 public class AdminController {
     private final AdminService adminService;
 
