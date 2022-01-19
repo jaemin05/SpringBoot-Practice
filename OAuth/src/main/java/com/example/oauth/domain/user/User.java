@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
-@Entity
+@Entity(name = "user")
 public class User {
     @Id
     @Column(name = "USER_ID")
