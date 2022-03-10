@@ -15,21 +15,22 @@ import java.io.IOException;
 @RequiredArgsConstructor
 @Component
 public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint {
-    
-    private final ObjectMapper objectMapper;
 
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException {
+
         ErrorCode errorCode = ErrorCode.FORBIDDEN;
-        String errorResponseJson = objectMapper.writeValueAsString(
+
+        String errorResponse = String.valueOf(
                 ErrorResponse.builder()
                         .status(errorCode.getStatus())
                         .code(errorCode.getCode())
                         .message(errorCode.getMessage())
-                        .build());
+                        .build()
+        );
 
         response.setStatus(errorCode.getStatus());
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-        response.getWriter().write(errorResponseJson);
+        response.getWriter().write(errorResponse);
     }
 }
