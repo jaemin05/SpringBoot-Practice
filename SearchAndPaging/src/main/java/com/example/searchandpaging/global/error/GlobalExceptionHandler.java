@@ -14,6 +14,7 @@ import java.util.Map;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
     @ExceptionHandler(CustomException.class)
     public ResponseEntity<ErrorResponse> handleGlobal(CustomException e) {
         final ErrorCode errorCode = e.getErrorCode();

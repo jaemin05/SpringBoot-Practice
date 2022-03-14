@@ -6,7 +6,6 @@ import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-//access = AccessLevel.PRIVATE: 외부에서 접근 못하게 막는다.
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
 public class ErrorResponse {
