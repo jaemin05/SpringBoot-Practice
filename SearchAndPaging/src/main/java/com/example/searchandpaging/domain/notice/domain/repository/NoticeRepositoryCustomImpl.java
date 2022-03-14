@@ -1,14 +1,11 @@
 package com.example.searchandpaging.domain.notice.domain.repository;
 
-import com.example.searchandpaging.domain.notice.domain.QNotice;
-import com.example.searchandpaging.domain.notice.exception.NoticeNotFoundException;
 import com.example.searchandpaging.domain.notice.presentation.dto.response.QQueryNoticeResponse_NoticeResponse;
 import com.example.searchandpaging.domain.notice.presentation.dto.response.QueryNoticeResponse.NoticeResponse;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 
-import javax.persistence.EntityListeners;
 import java.util.List;
 
 import static com.example.searchandpaging.domain.notice.domain.QNotice.notice;
@@ -22,9 +19,9 @@ public class NoticeRepositoryCustomImpl implements NoticeRepositoryCustom {
     public List<NoticeResponse> searchNoticeList(String keyword, Pageable pageable) {
         return jpaQueryFactory
                 .select(new QQueryNoticeResponse_NoticeResponse(
-                    notice.title,
-                    notice.content,
-                    notice.createAt
+                        notice.title,
+                        notice.content,
+                        notice.createAt
                 ))
                 .from(notice)
                 .where(notice.title.contains(keyword))
