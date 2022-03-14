@@ -19,10 +19,16 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    compileOnly 'org.projectlombok:lombok'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa' // DB 쿼리 작성을 쉽게 하기 위함
+    implementation 'org.springframework.boot:spring-boot-starter-security'// 스프링 시큐리티
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-web' // mvc 웹 구조 사용을 위함
+    compileOnly 'org.projectlombok:lombok' // 변수 get, set 함수 편리하게 만들기 위함
     annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'io.jsonwebtoken:jjwt:0.9.1'// jwt
+
+    runtimeOnly 'mysql:mysql-connector-java' // mysql 사용
+    implementation 'com.google.firebase:firebase-admin:8.1.0'
 }
 
 tasks.named('test') {
