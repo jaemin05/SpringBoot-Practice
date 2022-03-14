@@ -1,7 +1,6 @@
 package com.example.searchandpaging.global.error;
 
 import com.example.searchandpaging.global.error.exception.ErrorCode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.AuthenticationException;
