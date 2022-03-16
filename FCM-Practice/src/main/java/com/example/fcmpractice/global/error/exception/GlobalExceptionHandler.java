@@ -1,7 +1,7 @@
-package com.example.fcmpractice.global.exception;
+package com.example.fcmpractice.global.error.exception;
 
-import com.example.fcmpractice.global.error.exception.ErrorCode;
-import com.example.fcmpractice.global.error.exception.FCMPracticeException;
+import com.example.fcmpractice.global.error.ErrorCode;
+import com.example.fcmpractice.global.error.FCMPracticeException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;

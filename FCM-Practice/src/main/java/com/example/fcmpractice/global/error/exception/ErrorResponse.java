@@ -1,15 +1,14 @@
 package com.example.fcmpractice.global.error.exception;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-@AllArgsConstructor
-@JsonFormat(shape = JsonFormat.Shape.OBJECT)
-public enum ErrorCode {
-
-    INVALID_PARAMETER(400, "PARAMETER-400-1", "Invalid Parameter");
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Builder
+public class ErrorResponse {
 
     private final int status;
     private final String code;

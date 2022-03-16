@@ -1,6 +1,6 @@
-package com.example.fcmpractice.global.exception;
+package com.example.fcmpractice.global.error.exception;
 
-import com.example.fcmpractice.global.error.exception.FCMPracticeException;
+import com.example.fcmpractice.global.error.FCMPracticeException;
 import org.springframework.http.MediaType;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -15,7 +15,7 @@ public class ExceptionFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-        
+
         try{
             filterChain.doFilter(request, response);
         } catch (FCMPracticeException e) {
