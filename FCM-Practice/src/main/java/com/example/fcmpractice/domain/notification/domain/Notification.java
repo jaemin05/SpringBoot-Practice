@@ -23,7 +23,7 @@ public class Notification extends BaseTimeEntity {
     private Long id;
 
     @NotNull
-    @Column(length = 30, nullable = false)
+    @Column(length = 20, nullable = false)
     private String title;
 
     @NotNull
