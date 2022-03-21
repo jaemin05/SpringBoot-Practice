@@ -6,10 +6,9 @@ import org.springframework.data.domain.Pageable;
 
 public interface NoticeService {
 
-    public void createNotice(CreateNoticeRequest createNoticeRequest);
+    void createNotice(CreateNoticeRequest createNoticeRequest);
 
-    public void deleteNotice(Long noticeId);
+    void deleteNotice(Long noticeId);
 
-    public QueryNoticeResponse searchNoticeList(String keyword, Pageable pageable);
-
+    QueryNoticeResponse searchNoticeList(String keyword, Pageable pageable);
 }
