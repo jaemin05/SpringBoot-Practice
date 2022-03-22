@@ -5,6 +5,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,17 +23,19 @@ public class Notification extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
-    @Column(length = 20, nullable = false)
+    @Column(length = 30, nullable = false)
     private String title;
 
-    @NotNull
-    @Column(length = 200)
+    @Column(length = 200, nullable = false)
     private String content;
 
+    @NotNull
+    private Long data;
+
     @Builder
-    public Notification(String title, String content) {
+    public Notification(String title, String content, Long data) {
         this.title = title;
         this.content = content;
+        this.data = data;
     }
 }
