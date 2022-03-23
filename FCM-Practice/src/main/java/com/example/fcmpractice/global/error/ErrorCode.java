@@ -14,9 +14,12 @@ public enum ErrorCode {
 
     EXPIRED_JWT(401, "JWT-401-1", "Expired Jwt"),
     INVALID_JWT(401, "JWT-401-2", "Invalid Jwt"),
+    INVALID_USER(401, "USER-401-1", "Invalid User"),
 
     USER_NOT_FOUND(404,"USER-404-1", "User NotFound"),
     JWT_NOT_FOUND(404, "JWT-404-3", "Jwt Not Found"),
+    NOTICE_NOT_FOUND(404, "NOTICE-404-1", "Notice Not Found"),
+    NOTIFICATION_NOT_FOUND(404, "NOTIFICATION-404-1", "Notification Not Found"),
 
     ACCOUNT_ID_ALREADY_EXISTS(409, "USER-409-1", "AccountId Already Exists");
 
