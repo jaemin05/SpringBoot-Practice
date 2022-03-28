@@ -31,7 +31,8 @@ public class UserServiceImpl implements UserService {
                 User.builder()
                         .accountId(signupRequest.getAccountId())
                         .password(passwordEncoder.encode(signupRequest.getPassword()))
-                        .build());
+                        .build()
+        );
     }
 
     @Override
@@ -52,5 +53,4 @@ public class UserServiceImpl implements UserService {
                 .refreshToken(refresh)
                 .build();
     }
-
 }

@@ -1,6 +1,5 @@
 package com.example.fcmpractice.infrastructure.dto;
 
-import com.example.fcmpractice.domain.notice.domain.Notice;
 import com.example.fcmpractice.domain.user.domain.User;
 import lombok.Builder;
 import lombok.Getter;
