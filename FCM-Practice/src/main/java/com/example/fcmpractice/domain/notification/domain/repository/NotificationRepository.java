@@ -1,7 +1,7 @@
 package com.example.fcmpractice.domain.notification.domain.repository;
 
 import com.example.fcmpractice.domain.notification.domain.Notification;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 
-public interface NotificationRepository extends JpaRepository<Notification, Long> {
+public interface NotificationRepository extends CrudRepository<Notification, Long> {
 }
