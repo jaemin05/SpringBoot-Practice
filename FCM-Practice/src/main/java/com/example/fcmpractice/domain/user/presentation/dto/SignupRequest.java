@@ -5,13 +5,14 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Getter
 @NoArgsConstructor
 public class SignupRequest {
 
     @NotBlank(message = "아이디는 필수 입력입니다.")
-    @Pattern(regexp = "[a-zA-Z1-9]{5,10}$", message = "아이디는 영문자와 숫자를 모두 포함해서 5~10자리 이내로 입력해주세요.")
+    @Size(min = 5, max = 10, message = "아이디는 영문자와 숫자를 모두 포함해서 5~10자리 이내로 입력해주세요.")
     private String accountId;
 
     @NotBlank(message = "비밀번호는 필수 입력입니다.")
