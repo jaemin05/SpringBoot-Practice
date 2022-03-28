@@ -1,6 +1,6 @@
 package com.example.fcmpractice.domain.notification.service;
 
-import com.example.fcmpractice.domain.notification.domain.repository.NotificationRepository;
+import com.example.fcmpractice.domain.notification.domain.repository.NotificationListRepository;
 import com.example.fcmpractice.domain.notification.presentation.dto.NotificationListResponse;
 import com.example.fcmpractice.domain.notification.presentation.dto.NotificationListResponse.NotificationResponse;
 import com.example.fcmpractice.domain.user.domain.User;
@@ -15,10 +15,10 @@ import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
-public class NotificationServiceImpl implements NotificationService{
+public class NotificationServiceImpl implements NotificationService {
 
     private final UserFacade userFacade;
-    private final NotificationRepository notificationRepository;
+    private final NotificationListRepository notificationListRepository;
 
     @Override
     @Transactional(readOnly = true)
@@ -26,7 +26,7 @@ public class NotificationServiceImpl implements NotificationService{
 
         User user = userFacade.getCurrentUser();
 
-        List<NotificationResponse> notificationResponseList = notificationRepository.findByUser(user, pageable)
+        List<NotificationResponse> notificationResponseList = notificationListRepository.findByUser(user, pageable)
                 .stream()
                 .map(notification -> NotificationResponse.builder()
                         .id(notification.getNotification().getId())
