@@ -1,14 +1,13 @@
 package com.example.fcmpractice.domain.notification.presentation.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
 import java.util.List;
 
 @Getter
-@AllArgsConstructor
-public class NotificationResponse {
+@Builder
+public class NotificationListResponse {
 
     private final List<NotificationResponse> notificationResponseList;
 
@@ -20,5 +19,4 @@ public class NotificationResponse {
         private final String content;
         private final Long data;
     }
-
 }
