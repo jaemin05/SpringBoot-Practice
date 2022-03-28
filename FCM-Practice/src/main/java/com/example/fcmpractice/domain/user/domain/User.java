@@ -24,7 +24,7 @@ public class User extends BaseTimeEntity {
     @Column(nullable = false)
     private String accountId;
 
-    @Column(length = 30, nullable = false)
+    @Column(length = 60, nullable = false)
     private String password;
 
     @Column(name = "device_token")
