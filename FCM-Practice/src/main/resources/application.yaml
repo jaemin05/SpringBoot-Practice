@@ -11,9 +11,9 @@ spring:
       ddl-auto: update
 
 jwt:
+  secretKey: ${JWT_SECRET}
   accessExp: ${JWT_ACCESS_EXP}
   refreshExp: ${JWT_REFRESH_EXP}
-  secretKey: ${JWT_SECRET}
   header: ${JWT_HEADER}
   prefix: ${JWT_PREFIX}
 
