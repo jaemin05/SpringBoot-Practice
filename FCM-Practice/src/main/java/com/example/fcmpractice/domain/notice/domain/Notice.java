@@ -17,7 +17,7 @@ import javax.persistence.ManyToOne;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Entity
+@Entity(name = "notice")
 public class Notice {
 
     @Id
