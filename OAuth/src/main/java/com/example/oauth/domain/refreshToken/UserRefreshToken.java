@@ -4,7 +4,11 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -33,11 +37,11 @@ public class UserRefreshToken {
     @Builder
     public UserRefreshToken(String userId, String refreshToken, Long refreshExpiration) {
         this.userId = userId;
-        this. refreshToken = refreshToken;
+        this.refreshToken = refreshToken;
         this.refreshExpiration = refreshExpiration;
     }
 
-    public String reissue(String refreshToken, Long refreshExpiration){
+    public String reissue(String refreshToken, Long refreshExpiration) {
         this.refreshToken = refreshToken;
         this.refreshExpiration = refreshExpiration;
         return this.refreshToken;

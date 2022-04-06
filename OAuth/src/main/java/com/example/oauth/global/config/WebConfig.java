@@ -10,7 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebConfig implements WebMvcConfigurer {
 
     @Override
-    public void addCorsMappings(CorsRegistry registry){
+    public void addCorsMappings(CorsRegistry registry) {
         registry
                 .addMapping("/**") //CORS 적용할 URL 패턴
                 .allowedOrigins("*") // 자원을 공유할 오리진 지정

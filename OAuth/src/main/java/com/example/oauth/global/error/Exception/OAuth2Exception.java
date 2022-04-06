@@ -6,6 +6,6 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class OAuth2Exception extends RuntimeException{
+public class OAuth2Exception extends RuntimeException {
     private final ErrorCode errorCode;
 }

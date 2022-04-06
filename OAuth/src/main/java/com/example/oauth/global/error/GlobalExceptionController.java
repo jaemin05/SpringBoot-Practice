@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionController {
     @ExceptionHandler(OAuth2Exception.class)
-    public ResponseEntity<ErrorResponse> handleException(OAuth2Exception e){
+    public ResponseEntity<ErrorResponse> handleException(OAuth2Exception e) {
         final ErrorCode errorCode = e.getErrorCode();
         return new ResponseEntity<>(new ErrorResponse(errorCode.getMessage()), HttpStatus.valueOf(errorCode.getStatus()));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ErrorResponse> handleValidException(MethodArgumentNotValidException e){
+    public ResponseEntity<ErrorResponse> handleValidException(MethodArgumentNotValidException e) {
         return new ResponseEntity<>(
                 new ErrorResponse(e.getBindingResult().getAllErrors().get(0).getDefaultMessage()), HttpStatus.BAD_REQUEST);
     }
