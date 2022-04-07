@@ -1,111 +1,91 @@
 package com.example.oauth.global.security.token;
 
-import com.example.oauth.domain.refreshToken.UserRefreshTokenRepository;
+import com.example.oauth.domain.auth.domain.RefreshToken;
+import com.example.oauth.domain.auth.domain.repository.RefreshTokenRepository;
 import com.example.oauth.global.config.JwtProperties;
 import com.example.oauth.global.exception.ExpiredTokenException;
 import com.example.oauth.global.exception.InvalidTokenException;
-import com.example.oauth.global.exception.TokenValidFailedException;
+import com.example.oauth.global.security.auth.CustomUserDetailsService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.Date;
-import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
 public class TokenProvider {
-    private final JwtProperties jwtProperties;
-    private final UserRefreshTokenRepository refreshTokenRepository;
 
-    public String generateAccessToken(String id, String role) {
+    private final JwtProperties jwtProperties;
+    private final CustomUserDetailsService customUserDetailsService;
+    private final RefreshTokenRepository refreshTokenRepository;
+
+    private String generateToken(String email, String type, Long exp) {
         return Jwts.builder()
-                .setSubject(id)
-                .claim("type", "access")
-                .claim("role", role)
-                .signWith(SignatureAlgorithm.ES256, jwtProperties.getAuth().getSecretToken())
-                .setExpiration(
-                        new Date(System.currentTimeMillis() + jwtProperties.getAuth().getAccessTokenExp() * 1000)
-                )
+                .signWith(SignatureAlgorithm.HS256, jwtProperties.getSecretKey())
+                .setSubject(email)
+                .claim("typ", type)
                 .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + exp * 1000))
                 .compact();
     }
 
-    public String generateRefreshToken(String id, String role) {
-        return Jwts.builder()
-                .setSubject(id)
-                .claim("type", "refresh")
-                .claim("role", role)
-                .signWith(SignatureAlgorithm.HS256, jwtProperties.getAuth().getSecretToken())
-                .setExpiration(
-                        new Date(System.currentTimeMillis() + jwtProperties.getAuth().getRefreshTokenExp() * 1000)
-                )
-                .setIssuedAt(new Date())
-                .compact();
+    public String generateAccessToken(String email) {
+        return generateToken(email, "access", jwtProperties.getAccessExp());
+    }
+
+    public String generateRefreshToken(String email) {
+        String refresh = generateToken(email, "refresh", jwtProperties.getRefreshExp());
+
+        refreshTokenRepository.save(
+                RefreshToken.builder()
+                        .id(email)
+                        .refreshToken(refresh)
+                        .ttl(jwtProperties.getRefreshExp())
+                        .build());
+        return refresh;
+    }
+
+    public String resolveToken(HttpServletRequest request) {
+        String bearerToken = request.getHeader(jwtProperties.getHeader());
+        if (bearerToken != null && bearerToken.startsWith(jwtProperties.getPrefix()) && bearerToken.length() > 7)
+            return bearerToken.substring(7);
+        return null;
+    }
+
+    public boolean validateToken(String token) {
+        return getBody(token).getExpiration().after(new Date());
     }
 
     public Authentication getAuthentication(String token) {
-        if (validate(token)) {
-            Claims claims = getBody(token);
-            Collection<? extends GrantedAuthority> authorities =
-                    Arrays.stream(new String[]{claims.get("role").toString()})
-                            .map(SimpleGrantedAuthority::new)
-                            .collect(Collectors.toList());
+        Claims body = getBody(token);
+        if (body.getExpiration().before(new Date()))
+            throw ExpiredTokenException.Exception;
 
-            User principal = new User(claims.getSubject(), "", authorities);
-
-            return new UsernamePasswordAuthenticationToken(principal, "", authorities);
-        } else {
-            throw TokenValidFailedException.Exception;
-        }
+        UserDetails userDetails = getDetails(body);
+        return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }
 
-    public boolean validate(String token) {
-        return this.getBody(token) != null;
-    }
-
-    public boolean isRefreshToken(String refreshToken) {
-        return getBody(refreshToken).get("type").equals("refresh");
-    }
-
-    private Claims getBody(String token) {
+    public Claims getBody(String token) {
         try {
-            return Jwts.parserBuilder()
-                    .setSigningKey(jwtProperties.getAuth().getSecretToken())
-                    .build()
-                    .parseClaimsJws(token)
-                    .getBody();
+            return Jwts.parser()
+                    .setSigningKey(jwtProperties.getSecretKey())
+                    .parseClaimsJws(token).getBody();
         } catch (ExpiredJwtException e) {
             throw ExpiredTokenException.Exception;
-        } catch (JwtException e) {
+        } catch (Exception e) {
             throw InvalidTokenException.Exception;
         }
     }
 
-    public boolean checkRole(String token, String role) {
-        return getBody(token).get("role").equals(role);
+    public UserDetails getDetails(Claims body) {
+        return customUserDetailsService.loadUserByUsername(body.getSubject());
     }
-
-    public String resolveToken(HttpServletRequest request) {
-        String bearerToken = request.getHeader("Authorization");
-        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
-            return bearerToken.substring(7);
-        }
-        return null;
-    }
-
-
 }
