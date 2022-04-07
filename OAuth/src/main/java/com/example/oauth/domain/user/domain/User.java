@@ -1,6 +1,7 @@
 package com.example.oauth.domain.user.domain;
 
 import com.example.oauth.global.entity.BaseTimeEntity;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class User extends BaseTimeEntity {
 
@@ -37,19 +38,22 @@ public class User extends BaseTimeEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private AuthProvider authProvider;
+    private ProviderType providerType;
 
     @Builder
-    public User(String name, String email, String profileImageUrl, Role role, AuthProvider authProvider) {
+    public User(String name, String email, String profileImageUrl, Role role, ProviderType providerType) {
         this.name = name;
         this.email = email;
         this.profileImageUrl = profileImageUrl;
         this.role = role;
-        this.authProvider = authProvider;
+        this.providerType = providerType;
     }
 
-    public void update(String name, String profileImageUrl) {
+    public void updateName(String name) {
         this.name = name;
+    }
+
+    public void updateProfileImageUrl(String profileImageUrl) {
         this.profileImageUrl = profileImageUrl;
     }
 
